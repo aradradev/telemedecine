@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
   res.send('Hello World')
 })
 
-// middleware not found error handler...
+// middleware not found && error handler...
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
 
