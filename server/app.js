@@ -5,8 +5,9 @@ require('express-async-errors')
 // import Database
 const connectDB = require('./db/connect')
 
-// import middlewares
+// import middlewares error handlers
 const notFoundMiddleware = require('./middleware/not-found')
+const errorHandlerMiddleware = require('./middleware/error-handler')
 
 const app = express()
 
@@ -19,8 +20,9 @@ app.get('/', (req, res) => {
   res.send('Hello World')
 })
 
-// middleware not found...
-app.use(notFoundMiddleware())
+// middleware not found error handler...
+app.use(notFoundMiddleware)
+app.use(errorHandlerMiddleware)
 
 const start = async () => {
   try {
