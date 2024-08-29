@@ -5,6 +5,9 @@ require('express-async-errors')
 // import Database
 const connectDB = require('./db/connect')
 
+// import middlewares
+const notFoundMiddleware = require('./middleware/not-found')
+
 const app = express()
 
 // middleware
@@ -15,6 +18,9 @@ const port = process.env.PORT || 3000
 app.get('/', (req, res) => {
   res.send('Hello World')
 })
+
+// middleware not found...
+app.use(notFoundMiddleware())
 
 const start = async () => {
   try {
