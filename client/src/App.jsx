@@ -1,7 +1,8 @@
 import './app.css'
+import Layout from './Layout/Layout'
 
 function App() {
-  return <div className='text-[20px] text-blue-500'>Hello react + vite</div>
+  return <Layout />
 }
 
 export default App
