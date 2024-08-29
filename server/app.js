@@ -4,6 +4,9 @@ require('express-async-errors')
 
 const app = express()
 
+// middleware
+app.use(express.json())
+
 const port = process.env.PORT || 3000
 
 app.get('/', (req, res) => {
