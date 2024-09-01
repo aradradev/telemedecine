@@ -73,7 +73,7 @@ const Header = () => {
               ))}
             </ul>
           </div>
-          {/* ===============Navigation to right================ */}
+          {/* ===============Navigation to right start here================ */}
           <div className='flex items-center gap-4'>
             <div>
               <Link to='/' className='hidden'>
