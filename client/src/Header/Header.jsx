@@ -50,7 +50,7 @@ const Header = () => {
     <header className='header flex items-center' ref={headerRef}>
       <div className='container'>
         <div className='flex items-center justify-between'>
-          {/* ===============logo=============== */}
+          {/* ===============logo Start here=============== */}
           <div className='w-40'>
             <img src={logo} alt='image logo' />
           </div>
