@@ -1,6 +1,9 @@
 import heroImg1 from '../assets/images/hero-img01.png'
 import heroImg2 from '../assets/images/hero-img02.png'
 import heroImg3 from '../assets/images/hero-img03.png'
+import icon1 from '../assets/images/icon01.png'
+// import icon2 from '../assets/images/icon02.png'
+// import icon3 from '../assets/images/icon03.png'
 
 const Home = () => {
   return (
@@ -64,7 +67,28 @@ const Home = () => {
         </section>
       </>
       {/** Hero section end*/}
+
       {/** section start here*/}
+      <section>
+        <div className='container'>
+          <div className='lg:w-[470px] mx-auto'>
+            <h2 className=' heading text-center'>Comprehensive Healthcare at Your Fingertips</h2>
+            <p className='text__para mt-4 text-center'>
+              At WeCareHealth, we bring quality healthcare services directly to your home. Whether you need a
+              consultation with a specialist, follow-up care, or access to your medical history, our platform ensures
+              you get the care you need anytime, anywhere.
+            </p>
+          </div>
+
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-[30px] mt-[30px] lg:mt-[55px]'>
+            <div className='py-[30px] px-5'>
+              <div className='flex items-center justify-between'>
+                <img src={icon1} alt='' />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   )
 }
