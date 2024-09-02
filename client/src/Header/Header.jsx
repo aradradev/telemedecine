@@ -1,3 +1,4 @@
+import '../App.css'
 import { useEffect, useRef } from 'react'
 import logo from '../assets/images/vector/logoBlack.svg'
 import userImg from '../assets/images/avatar-icon.png'
@@ -56,7 +57,7 @@ const Header = () => {
           </div>
 
           {/* ===============menu start here=============== */}
-          <div className='navigation' onClick={toggleMenu}>
+          <div className='navigation' ref={menuRef} onClick={toggleMenu}>
             <ul className='menu flex items-center gap-[2.7rem]'>
               {navLinks.map((link, index) => (
                 <li key={index}>
