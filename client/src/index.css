@@ -24,6 +24,9 @@
   .header {
     @apply bg-[url('./assets/images/maskcanvas.png')] bg-no-repeat bg-cover w-full h-[100px] leading-[100px];
   }
+  .hero__section {
+    @apply bg-[url('./assets/images/maskcanvas.png')] bg-no-repeat bg-cover w-full;
+  }
 }
 @media only screen and (max-width: 1024) {
   .container {
