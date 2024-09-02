@@ -6,6 +6,7 @@ import icon2 from '../assets/images/icon02.png'
 import icon3 from '../assets/images/icon03.png'
 import { Link } from 'react-router-dom'
 import { BsArrowRight } from 'react-icons/bs'
+import About from '../components/Abdout/About'
 
 const Home = () => {
   return (
@@ -105,10 +106,11 @@ const Home = () => {
                 <img src={icon2} alt='icon 2' />
               </div>
               <div className='mt-[30px]'>
-                <h2 className='text-[26px] leading-9 text-headingColor font-[700] text-center'>Online Consultation</h2>
+                <h2 className='text-[26px] leading-9 text-headingColor font-[700] text-center'>
+                  Access Medical Records
+                </h2>
                 <p className='text-[16px] leading-7 text-textColor font-[400] mt-4 text-center'>
-                  Schedule and attend virtual consultations from the comfort of your home, with doctors available around
-                  the clock.
+                  Easily access and manage your medical history and records in one secure location, anytime you need.
                 </p>
                 <Link
                   to='/doctors'
@@ -137,6 +139,10 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/** About section start here */}
+      <About />
+      {/** About section end here */}
     </>
   )
 }
