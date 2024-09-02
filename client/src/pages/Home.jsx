@@ -64,6 +64,7 @@ const Home = () => {
         </section>
       </>
       {/** Hero section end*/}
+      {/** section start here*/}
     </>
   )
 }
