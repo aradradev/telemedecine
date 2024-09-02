@@ -1,4 +1,4 @@
 const Home = () => {
-  return <div>Home</div>
+  return <>{/** Hero section */}</>
 }
 export default Home
