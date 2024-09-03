@@ -7,6 +7,7 @@ import icon3 from '../assets/images/icon03.png'
 import { Link } from 'react-router-dom'
 import { BsArrowRight } from 'react-icons/bs'
 import About from '../components/About/About'
+import ServiceList from '../components/Services/ServiceList'
 
 const Home = () => {
   return (
@@ -154,6 +155,7 @@ const Home = () => {
               complex surgeries, we have the expertise and technology to handle any medical need.
             </p>
           </div>
+          <ServiceList />
         </div>
       </section>
       {/** services section end*/}
