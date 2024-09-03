@@ -13,6 +13,7 @@ import { BsArrowRight } from 'react-icons/bs'
 import About from '../components/About/About'
 import ServiceList from '../components/Services/ServiceList'
 import DoctorList from '../components/Doctors/DoctorList'
+import FaqList from '../components/Faq/FaqList'
 
 const Home = () => {
   return (
@@ -237,6 +238,9 @@ const Home = () => {
           <div className='flex items-center justify-between gap-[50px] lg:gap-0'>
             <div className='w-1/2 hidden md:block'>
               <img src={faqImg} alt='faqImg' />
+            </div>
+            <div className='w-full md:w1/2'>
+              <h2 className='heading'>Most questions asked by our beloved patients</h2>
             </div>
           </div>
         </div>
