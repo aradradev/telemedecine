@@ -143,6 +143,20 @@ const Home = () => {
       {/** About section start here */}
       <About />
       {/** About section end here */}
+
+      {/** services section start */}
+      <section>
+        <div className='container'>
+          <div className='xl:w-[470px] mx-auto'>
+            <h2 className='heading text-center'>Our medical services</h2>
+            <p className='tex__para text-center'>
+              Our medical services are designed to provide you with the best possible care. From routine check-ups to
+              complex surgeries, we have the expertise and technology to handle any medical need.
+            </p>
+          </div>
+        </div>
+      </section>
+      {/** services section end*/}
     </>
   )
 }
