@@ -214,6 +214,17 @@ const Home = () => {
       </section>
       {/** Feature section start*/}
       {/** Our great Doctor start here*/}
+      <section>
+        <div className='container'>
+          <div className='xl:w-[470px] mx-auto'>
+            <h2 className='heading text-center'>Our great doctors</h2>
+            <p className='text__para text-center'>
+              Our medical services are designed to provide you with the best possible care. From routine check-ups to
+              complex surgeries, we have the expertise and technology to handle any medical need.
+            </p>
+          </div>
+        </div>
+      </section>
       {/** Our great Doctor end here*/}
     </>
   )
