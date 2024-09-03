@@ -4,6 +4,7 @@ import heroImg3 from '../assets/images/hero-img03.png'
 import icon1 from '../assets/images/icon01.png'
 import icon2 from '../assets/images/icon02.png'
 import icon3 from '../assets/images/icon03.png'
+import featureImg from '../assets/images/feature-img.png'
 import { Link } from 'react-router-dom'
 import { BsArrowRight } from 'react-icons/bs'
 import About from '../components/About/About'
@@ -159,6 +160,47 @@ const Home = () => {
         </div>
       </section>
       {/** services section end*/}
+
+      {/** Feature section start*/}
+      <section>
+        <div className='container'>
+          <div className='flex items-center justify-between flex-col lg:flex-row'>
+            {/** Feature content */}
+            <div className='xl:w-[670px]'>
+              <h2 className='heading'>
+                Get Virtual Treatment <br /> Anytime, Anywhere
+              </h2>
+              <ul className='pl-4'>
+                <li className='text__para'>1. Connect with top specialists from the comfort of your home.</li>
+                <li className='text__para'>2. Receive personalized care tailored to your health needs.</li>
+                <li className='text__para'>3. Access your medical records securely anytime, anywhere.</li>
+                <li className='text__para'>4. Enjoy 24/7 support for all your healthcare queries.</li>
+              </ul>
+              <Link to='/'>
+                <button className='btn'>Learn More</button>
+              </Link>
+            </div>
+            {/** feature img */}
+            <div className='relative z-10 xl:w-[770px] flex justify-end mt-[50px] lg:mt-0'>
+              <img src={featureImg} alt='featureImg' />
+
+              <div className='w-[150px] lg:w-[248px] bg-white absolute bottom-[50px] md:bottom-[100px] left-0 md:left-5 z-20 p-2 pb-3 lg:pt-4 lg:px-4 lg:pb-[26px] rounded-[10px]'>
+                <div className='flex items-center justify-between'>
+                  <div className='flex items-center gap-[6px] lg:gap-3'>
+                    <p className='text-[10px] leading-[10px] lg:text-[14px] lg:leading-5 text-textColor font-[400]'>
+                      Mon, 26
+                    </p>
+                    <p className='text-[10px] leading-[10px] lg:text-[14px] lg:leading-5 text-textColor font-[400]'>
+                      10:00 AM
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/** Feature section start*/}
     </>
   )
 }
