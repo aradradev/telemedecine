@@ -248,7 +248,18 @@ const Home = () => {
       </section>
       {/** Faq section end here*/}
       {/** testimonial start*/}
-
+      <section>
+        <div className='container'>
+          <div className='xl:w-[470px] mx-auto'>
+            <h2 className='heading text-center'>What our patients say</h2>
+            <p className='text__para text-center'>
+              At WeCareHealth, we’re committed to delivering exceptional healthcare experiences. Our patients trust us
+              for our expertise, compassion, and innovative approach to care. Hear from those who have experienced the
+              difference firsthand.
+            </p>
+          </div>
+        </div>
+      </section>
       {/** testimonial end */}
     </>
   )
