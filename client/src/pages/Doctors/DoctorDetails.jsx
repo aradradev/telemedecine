@@ -23,12 +23,19 @@ const DoctorDetails = () => {
                     (272)
                   </span>
                 </div>
-                <p className='text__para text-[14px] leading-5 md:text-[15px] lg:max-w-[390px]'>
+                <p className='text__para text-[14px] leading-6 md:text-[15px] lg:max-w-[390px]'>
                   Dr. John Doe is a highly skilled surgeon with over 10 years of experience in providing exceptional
                   care. He is known for his precision and compassionate approach, ensuring the best outcomes for his
                   patients.
                 </p>
               </div>
+            </div>
+
+            <div className='mt-[50px] border-b border-solid border-[#0066ff34]'>
+              <button className={` py-2 px-5 mr-5 text-[16px] leading-7 text-headingColor font-semibold`}>About</button>
+              <button className={` py-2 px-5 mr-5 text-[16px] leading-7 text-headingColor font-semibold`}>
+                Feedback
+              </button>
             </div>
           </div>
         </div>
