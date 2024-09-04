@@ -1,4 +1,6 @@
 const FaqItem = () => {
-  return <div>FaqItem</div>
+  return (
+    <div>FaqItem</div>
+  )
 }
 export default FaqItem
