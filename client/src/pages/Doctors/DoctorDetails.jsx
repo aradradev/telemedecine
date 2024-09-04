@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import imgDoctor from '../../assets/images/doctor-img02.png'
 import starIcon from '../../assets/images/Star.png'
+import DoctorAbout from './DoctorAbout'
+import Feedback from './Feedback'
 const DoctorDetails = () => {
   const [tab, setTab] = useState('about')
   return (
@@ -49,6 +51,11 @@ const DoctorDetails = () => {
                 } py-2 px-5 mr-5 text-[16px] leading-7 text-headingColor font-semibold`}>
                 Feedback
               </button>
+            </div>
+
+            <div className='mt-4'>
+              {tab === 'about' && <DoctorAbout />}
+              {tab === 'feedback' && <Feedback />}
             </div>
           </div>
         </div>
