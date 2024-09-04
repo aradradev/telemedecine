@@ -1,3 +1,7 @@
+import { services } from '../assets/data/services'
+import ServiceCard from '../components/Services/ServiceCard'
+import Testimonial from '../components/Testimonial/Testimonial'
+
 const Services = () => {
   return (
     <section>
