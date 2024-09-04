@@ -14,6 +14,7 @@ import About from '../components/About/About'
 import ServiceList from '../components/Services/ServiceList'
 import DoctorList from '../components/Doctors/DoctorList'
 import FaqList from '../components/Faq/FaqList'
+import Testimonial from '../components/Testimonial/Testimonial'
 
 const Home = () => {
   return (
@@ -258,6 +259,7 @@ const Home = () => {
               difference firsthand.
             </p>
           </div>
+          <Testimonial />
         </div>
       </section>
       {/** testimonial end */}
