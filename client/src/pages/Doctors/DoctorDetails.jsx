@@ -36,12 +36,17 @@ const DoctorDetails = () => {
             <div className='mt-[50px] border-b border-solid border-[#0066ff34]'>
               <button
                 onClick={() => setTab('about')}
-                className={` py-2 px-5 mr-5 text-[16px] leading-7 text-headingColor font-semibold`}>
+                className={`${
+                  tab === 'about' && 'border-b border-solid border-primaryColor transition-all ease-in-out duration-900'
+                } py-2 px-5 mr-5 text-[16px] leading-7 text-headingColor font-semibold`}>
                 About
               </button>
               <button
                 onClick={() => setTab('feedback')}
-                className={` py-2 px-5 mr-5 text-[16px] leading-7 text-headingColor font-semibold`}>
+                className={`${
+                  tab === 'feedback' &&
+                  'border-b border-solid border-primaryColor transition-all ease-in-out duration-900'
+                } py-2 px-5 mr-5 text-[16px] leading-7 text-headingColor font-semibold`}>
                 Feedback
               </button>
             </div>
