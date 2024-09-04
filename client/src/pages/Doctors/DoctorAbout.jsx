@@ -21,7 +21,7 @@ const DoctorAbout = () => {
               <span className='text-irisBlueColor text-[15px] leading-6 font-semibold '>
                 {formateDate('08-24-2015')}
               </span>
-              <p className='text-[16px] leading-6 font-medium text-textColor'>PHD in Surgeon</p>
+              <p className='text-[15px] leading-6 font-medium text-textColor'>PHD in Surgeon</p>
             </div>
             <p className='text-[14px] leading-5 font-medium text-textColor'>New Appollo, New York.</p>
           </li>
@@ -30,11 +30,15 @@ const DoctorAbout = () => {
               <span className='text-irisBlueColor text-[15px] leading-6 font-semibold '>
                 {formateDate('10-01-2012')}
               </span>
-              <p className='text-[16px] leading-6 font-medium text-textColor'>PHD in Surgeon</p>
+              <p className='text-[15px] leading-6 font-medium text-textColor'>PHD in Surgeon</p>
             </div>
             <p className='text-[14px] leading-5 font-medium text-textColor'>New Appollo, New York.</p>
           </li>
         </ul>
+      </div>
+
+      <div className='mt-12'>
+        <h3 className='text-[20px] leading-[30px] text-headingColor font-semibold'>Experience</h3>
       </div>
     </div>
   )

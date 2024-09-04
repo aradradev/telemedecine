@@ -53,7 +53,7 @@ const DoctorDetails = () => {
               </button>
             </div>
 
-            <div className='mt-4'>
+            <div className='mt-12'>
               {tab === 'about' && <DoctorAbout />}
               {tab === 'feedback' && <Feedback />}
             </div>
