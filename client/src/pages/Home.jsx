@@ -241,12 +241,15 @@ const Home = () => {
             </div>
             <div className='w-full md:w-1/2'>
               <h2 className='heading'>Most questions asked by our beloved patients</h2>
-              <FaqList/>
+              <FaqList />
             </div>
           </div>
         </div>
       </section>
       {/** Faq section end here*/}
+      {/** testimonial start*/}
+
+      {/** testimonial end */}
     </>
   )
 }
