@@ -2,16 +2,9 @@ const express = require('express')
 require('dotenv').config()
 require('express-async-errors')
 
-// middleware import
+// middleware built in import
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
-
-const corsOptions = {
-  origin: true,
-}
-//middleware built in
-app.use(cors())
-app.use(cookieParser())
 
 // import Database
 const connectDB = require('./db/connect')
@@ -22,8 +15,15 @@ const errorHandlerMiddleware = require('./middleware/error-handler')
 
 const app = express()
 
-// middleware
+// cors defined
+const corsOptions = {
+  origin: true,
+}
+
+// middleware built in
 app.use(express.json())
+app.use(cors(corsOptions))
+app.use(cookieParser())
 
 const port = process.env.PORT || 5000
 
