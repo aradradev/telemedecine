@@ -1,4 +1,5 @@
 import signupImg from '../assets/images/signup.gif'
+import avatar from '../assets/images/doctor-img02.png'
 
 const Signup = () => {
   return (
@@ -65,6 +66,14 @@ const Signup = () => {
                     <option value='other'>Other</option>
                   </select>
                 </label>
+              </div>
+              <div className='mb-5 flex items-center gap-3'>
+                <figure className='w-[60px] h-[60px] rounded-full border-2 border-solid border-primaryColor flex items-center justify-center'>
+                  <img src={avatar} alt='avatar' className='rounded-full w-full' />
+                </figure>
+                <div>
+                  <input type='file' name='photo' id='customFile' accept='jpeg, png, jpg' />
+                </div>
               </div>
             </form>
           </div>
