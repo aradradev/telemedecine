@@ -18,7 +18,7 @@ const Feedback = () => {
             <div>
               <h5 className='text-[16px] leading-6 text-primaryColor font-bold'>Ali patient</h5>
               <p className='text-[14px] leading-6 text-textColor'>{formateDate('09-04-2024')}</p>
-              <p className='text__para mt-3 font-medium text-[15px]'>Good services, highly recommended</p>
+              <p className='text__para mt-3 font-medium text-[15px]'>Good services, highly recommended 👍</p>
             </div>
           </div>
           <div className='flex gap-1'>
