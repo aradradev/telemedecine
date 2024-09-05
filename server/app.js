@@ -15,14 +15,14 @@ const errorHandlerMiddleware = require('./middleware/error-handler')
 
 const app = express()
 
-// cors defined
+// set up security
 const corsOptions = {
   origin: true,
 }
+app.use(cors(corsOptions))
 
 // middleware built in
 app.use(express.json())
-app.use(cors(corsOptions))
 app.use(cookieParser())
 
 const port = process.env.PORT || 5000
