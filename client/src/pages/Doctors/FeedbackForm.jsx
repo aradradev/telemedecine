@@ -5,6 +5,11 @@ const FeedbackForm = () => {
   const [rating, setRating] = useState(0)
   const [hover, setHover] = useState(0)
   const [reviewText, setReviewText] = useState('')
+
+  const handleSubmitReview = async (e) => {
+    e.preventDefault()
+  }
+
   return (
     <form action=''>
       <div>
@@ -47,7 +52,9 @@ const FeedbackForm = () => {
           onChange={(e) => setReviewText(e.target.value)}
           rows='5'></textarea>
       </div>
-      <button className='btn'>Submit Feedback</button>
+      <button className='btn' type='submit' onClick={handleSubmitReview}>
+        Submit Feedback
+      </button>
     </form>
   )
 }
