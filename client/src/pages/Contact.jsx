@@ -30,6 +30,9 @@ const Contact = () => {
             </label>
             <textarea rows='6' type='text' id='message' className='form__input mt-4' placeholder='Leave a comment...' />
           </div>
+          <button type='submit' className='btn rounded sm:w-fit'>
+            Submit
+          </button>
         </form>
       </div>
     </section>
