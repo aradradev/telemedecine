@@ -22,11 +22,49 @@ const Signup = () => {
                 <input
                   type='text'
                   placeholder='Full Name'
+                  name='name'
+                  value=''
+                  className='py-3 pr-4 w-full border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor cursor-pointer'
+                  required
+                />
+                <input
+                  type='email'
+                  placeholder='Enter your email'
                   name='email'
                   value=''
                   className='py-3 pr-4 w-full border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor cursor-pointer'
                   required
                 />
+                <input
+                  type='password'
+                  placeholder='Password'
+                  name='password'
+                  value=''
+                  className='py-3 pr-4 w-full border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor cursor-pointer'
+                  required
+                />
+              </div>
+              <div className='mb-5 flex ic justify-between'>
+                <label htmlFor='' className='text-headingColor text-[16px] leading-7 font-bold'>
+                  Are you a:
+                  <select
+                    name='role'
+                    className='text-textColor font-semibold text-[15px] leading-6 px-4 py-3 focus:outline-none '>
+                    <option value='patient'>Patient</option>
+                    <option value='doctor'>Doctor</option>
+                  </select>
+                </label>
+                <label htmlFor='' className='text-headingColor text-[16px] leading-7 font-bold'>
+                  Gender:
+                  <select
+                    name='gender'
+                    className='text-textColor font-semibold text-[15px] leading-6 px-4 py-3 focus:outline-none '>
+                    <option value=''>Select</option>
+                    <option value='male'>Male</option>
+                    <option value='female'>Female</option>
+                    <option value='other'>Other</option>
+                  </select>
+                </label>
               </div>
             </form>
           </div>
