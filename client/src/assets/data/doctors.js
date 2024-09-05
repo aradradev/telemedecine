@@ -26,7 +26,7 @@ export const doctors = [
   {
     id: '03',
     name: 'Dr. Carter',
-    specialization: 'Orthopedic Surgeon',
+    specialization: 'Surgeon',
     avgRating: 4.8,
     totalRating: 310,
     photo: doctorImg03,
