@@ -25,6 +25,10 @@ const Signup = () => {
     console.log(file)
   }
 
+  const submitHandler = async (e) => {
+    e.preventDefault()
+  }
+
   return (
     <section className='px-5 lg:px-0'>
       <div className='max-w-[1170px] mx-auto'>
@@ -41,7 +45,7 @@ const Signup = () => {
             <h3 className='text-headingColor text-[22px] leading-9 font-bold mb-3'>
               Create an <span className='text-primaryColor'>account</span>
             </h3>
-            <form>
+            <form onSubmit={submitHandler}>
               <div className='mb-5'>
                 <input
                   type='text'
