@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -26,7 +27,29 @@ const Login = () => {
               className='px-4 py-3 w-full border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer'
               required
             />
+            <input
+              type='password'
+              placeholder='Password'
+              name='password'
+              value={formData.password}
+              onChange={handleInputChange}
+              className='px-4 py-3 w-full border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer'
+              required
+            />
           </div>
+          <div className='mt-5'>
+            <button
+              className='bg-primaryColor text-white w-full py-3 px-4 text-[18px] rounded-lg leading-[30px]'
+              type='submit'>
+              Login
+            </button>
+          </div>
+          <p className='mt-5 text-textColor text-center'>
+            Don&apos;t have an account?
+            <Link to='/register' className='text-primaryColor font-medium ml-1'>
+              Register
+            </Link>
+          </p>
         </form>
       </div>
     </section>
