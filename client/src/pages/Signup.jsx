@@ -71,8 +71,19 @@ const Signup = () => {
                 <figure className='w-[60px] h-[60px] rounded-full border-2 border-solid border-primaryColor flex items-center justify-center'>
                   <img src={avatar} alt='avatar' className='rounded-full w-full' />
                 </figure>
-                <div>
-                  <input type='file' name='photo' id='customFile' accept='jpeg, png, jpg' />
+                <div className='relative w-[130px] h-[50px]'>
+                  <input
+                    type='file'
+                    name='photo'
+                    id='customFile'
+                    accept='jpeg, png, jpg'
+                    className='absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer'
+                  />
+                  <label
+                    htmlFor='customFile'
+                    className='absolute top-0 left-0 w-full h-full flex items-center px-[0.75rem] py-[0.375rem] text-[16px] leading-6 overflow-hidden bg-[#0066ff46] text-headingColor font-semibold rounded-lg truncate cursor-pointer'>
+                    Upload Photo
+                  </label>
                 </div>
               </div>
             </form>
