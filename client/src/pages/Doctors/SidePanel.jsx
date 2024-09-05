@@ -3,7 +3,7 @@ const SidePanel = () => {
     <div className='shadow-panelShadow p-3 lg:p-5 rounded-md'>
       <div className='flex items-center justify-between'>
         <p className='text__para mt-0 font-semibold'>Ticket Price</p>
-        <span className='text-[16px] leading-7 lg:text-[22px] lg:leading-8 text-headingColor font-bold'>120</span>
+        <span className='text-[16px] leading-7 lg:text-[22px] lg:leading-8 text-headingColor font-bold'>30K GNF</span>
       </div>
       <div className='mt-[30px]'>
         <p className='text__para mt-0 font-semibold text-textColor'>Available Time Slots</p>
@@ -22,6 +22,7 @@ const SidePanel = () => {
           </li>
         </ul>
       </div>
+      <button className='btn px-2 rounded-md w-full'>Book Appointment</button>
     </div>
   )
 }
