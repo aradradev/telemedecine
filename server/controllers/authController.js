@@ -1,6 +1,7 @@
 const User = require('../models/User')
 const CustomError = require('../errors')
 const { StatusCodes } = require('http-status-codes')
+const { createTokenUser } = require('../utils')
 
 const register = async (req, res) => {
   const { name, email, password } = req.body
@@ -14,7 +15,7 @@ const register = async (req, res) => {
   const role = isFirstAccount ? 'admin' : 'patient'
 
   const user = await User.create({ name, email, password, role })
-  const tokenUser = { name: user.name, userId: user._id, role: user.role }
+  const tokenUser = createTokenUser(user)
   res.status(StatusCodes.CREATED).json({ user: tokenUser })
 }
 
