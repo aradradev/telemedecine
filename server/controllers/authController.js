@@ -22,9 +22,9 @@ const register = async (req, res) => {
   let user = null
 
   if (role === 'patient') {
-    user = User.findOne({ email })
+    user = await User.findOne({ email })
   } else if (role === 'doctor') {
-    user = Doctor.findOne({ email })
+    user = await Doctor.findOne({ email })
   }
 
   if (user) {
@@ -41,10 +41,43 @@ const register = async (req, res) => {
       gender,
     })
   }
+  if (role === 'doctor') {
+    user = new Doctor({
+      name,
+      email,
+      password,
+      role,
+      photo,
+      gender,
+    })
+  }
+
+  await user.save()
+  res.status(StatusCodes.CREATED).json({ success: true, message: 'User successfully created.' })
 }
 
 const login = async (req, res) => {
-  res.send('login route')
+  const { email, password } = req.body
+  let user = null
+  const patient = await User.findOne({ email })
+  const doctor = await Doctor.findOne({ email })
+  if (patient) {
+    user = patient
+  }
+  if (doctor) {
+    user = doctor
+  }
+
+  if (!user) {
+    throw new CustomError.NotFoundError('User not found')
+  }
+
+  const isPasswordCorrect = await user.comparePassword(password)
+  if (!isPasswordCorrect) {
+    throw new CustomError.UnauthenticatedError('Invalid Credentials')
+  }
+  const tokenUser = createTokenUser(user)
+  res.status(StatusCodes.CREATED).json({ user: tokenUser })
 }
 
 const logout = async (req, res) => {
