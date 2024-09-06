@@ -30,6 +30,17 @@ const register = async (req, res) => {
   if (user) {
     throw new CustomError.BadRequestError('User already exist')
   }
+
+  if (role === 'patient') {
+    user = new User({
+      name,
+      email,
+      password,
+      role,
+      photo,
+      gender,
+    })
+  }
 }
 
 const login = async (req, res) => {
