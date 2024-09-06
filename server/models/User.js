@@ -28,6 +28,17 @@ const UserSchema = new mongoose.Schema({
     enum: ['patient', 'doctor', 'admin'],
     default: 'patient',
   },
+  gender: {
+    type: String,
+    enum: ['male', 'female', 'other'],
+  },
+  bloodType: {
+    type: String,
+  },
+  appointments: {
+    type: mongoose.Types.ObjectId,
+    ref: 'Appointment',
+  },
 })
 
 module.exports = mongoose.model('User', UserSchema)
