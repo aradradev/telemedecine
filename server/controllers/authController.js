@@ -10,7 +10,10 @@ const register = async (req, res) => {
     throw new CustomError.BadRequestError('Email already exist')
   }
 
-  const user = await User.create({ name, email, password })
+  const isFirstAccount = (await User.countDocuments({})) === 0
+  const role = isFirstAccount ? 'admin' : 'patient'
+
+  const user = await User.create({ name, email, password, role })
   const tokenUser = { name: user.name, userId: user._id, role: user.role }
   res.status(StatusCodes.CREATED).json({ user: tokenUser })
 }
