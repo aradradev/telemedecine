@@ -30,10 +30,11 @@ const DoctorSchema = new mongoose.Schema({
   },
   specialization: {
     type: String,
+    required: [true, 'Please provide specialization'],
   },
   qualifications: { type: Array },
   experiences: { type: Array },
-  bio: { type: String, maxlength: 50 },
+  bio: { type: String, maxlength: 500 },
   timeSlots: { type: Array },
   reviews: [
     {
