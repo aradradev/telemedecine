@@ -15,6 +15,9 @@ const errorHandlerMiddleware = require('./middleware/error-handler')
 
 const app = express()
 
+// import routes
+const authRouter = require('./routes/authRoutes')
+
 // set up security
 const corsOptions = {
   origin: true,
@@ -30,6 +33,9 @@ const port = process.env.PORT || 5000
 app.get('/', (req, res) => {
   res.send('Hello World')
 })
+
+// Path routes
+app.use('/api/v1/auth', authRouter)
 
 // middleware not found && error handler...
 app.use(notFoundMiddleware)
