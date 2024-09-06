@@ -40,6 +40,19 @@ const DoctorSchema = new mongoose.Schema({
       ref: 'Review',
     },
   ],
+  averageRating: {
+    type: Number,
+    default: 0,
+  },
+  totalRating: {
+    type: Number,
+    default: 0,
+  },
+  isApproved: {
+    type: String,
+    enum: ['pending', 'approved', 'cancelled'],
+    default: 0,
+  },
 })
 
 module.exports = mongoose.model('Doctor', DoctorSchema)
