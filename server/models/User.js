@@ -35,6 +35,7 @@ const UserSchema = new mongoose.Schema({
   },
   bloodType: {
     type: String,
+    enum: ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'],
   },
   appointments: {
     type: mongoose.Types.ObjectId,
