@@ -51,7 +51,7 @@ const DoctorSchema = new mongoose.Schema({
   isApproved: {
     type: String,
     enum: ['pending', 'approved', 'cancelled'],
-    default: 0,
+    default: 'pending',
   },
 })
 
