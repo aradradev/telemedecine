@@ -1,31 +1,33 @@
 const mongoose = require('mongoose')
 
 const UserSchema = new mongoose.Schema({
- name:{
-  type: String,
-  required: [true, 'Please provide name'],
-  minlength:3,
-  maxlength:50
- },
- email:{
-  type: String,
-  required:[true, 'Please provide email'],
-  validate: {
-   validator: validator.isEmail,
-   message: 'Please provide valid email'
+  name: {
+    type: String,
+    required: [true, 'Please provide name'],
+    minlength: 3,
+    maxlength: 50,
   },
-  unique: true,
- },
- password:{
-  type: String,
-  required:[true, 'Please provide password'],
-  minlength:6,
- },
- role:{
-  type: String,
-  enum: ['patient', 'doctor', 'admin'],
-  default: 'patient'
- }
+  email: {
+    type: String,
+    required: [true, 'Please provide email'],
+    validate: {
+      validator: validator.isEmail,
+      message: 'Please provide valid email',
+    },
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: [true, 'Please provide password'],
+    minlength: 6,
+  },
+  phone: { type: Number },
+  photo: { type: String },
+  role: {
+    type: String,
+    enum: ['patient', 'doctor', 'admin'],
+    default: 'patient',
+  },
 })
 
 module.exports = mongoose.model('User', UserSchema)
