@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
+const bcrypt = require('bcryptjs')
 
 const DoctorSchema = new mongoose.Schema(
   {
@@ -65,6 +66,13 @@ const DoctorSchema = new mongoose.Schema(
   },
   { timestamps: true },
 )
+
+DoctorSchema.pre('save', async function () {
+  if (!this.isModified('password')) return
+
+  const salt = await bcrypt.genSalt(10)
+  this.password = await bcrypt.hash(this.password, salt)
+})
 
 DoctorSchema.methods.comparePassword = async function (candidatePassword) {
   const isMatch = await bcrypt.compare(candidatePassword, this.password)
