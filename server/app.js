@@ -26,7 +26,7 @@ app.use(cors(corsOptions))
 
 // middleware built in
 app.use(express.json())
-app.use(cookieParser())
+app.use(cookieParser(process.env.JWT_SECRET))
 
 const port = process.env.PORT || 5000
 

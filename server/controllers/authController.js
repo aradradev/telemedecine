@@ -2,54 +2,28 @@ const User = require('../models/User')
 const Doctor = require('../models/Doctor')
 const CustomError = require('../errors')
 const { StatusCodes } = require('http-status-codes')
-const { createTokenUser } = require('../utils')
+const { createTokenUser, attachCookiesToResponse } = require('../utils')
 
 const register = async (req, res) => {
-  const { name, email, password, role, photo, gender } = req.body
+  const { name, email, password, role: userRole, photo, gender } = req.body
 
-  // const isEmailExist = await User.findOne({ email })
-  // if (isEmailExist) {
-  //   throw new CustomError.BadRequestError('Email already exist')
-  // }
+  const userExists = (await User.findOne({ email })) || (await Doctor.findOne({ email }))
+  if (userExists) {
+    throw new CustomError.BadRequestError('User already exists')
+  }
 
-  // const isFirstAccount = (await User.countDocuments({})) === 0
-  // const role = isFirstAccount ? 'admin' : 'patient'
+  const isFirstAccount = (await User.countDocuments({})) === 0
+  const role = isFirstAccount ? 'admin' : userRole
 
-  // const user = await User.create({ name, email, password, role })
-  // const tokenUser = createTokenUser(user)
-  // res.status(StatusCodes.CREATED).json({ user: tokenUser })
-
-  let user = null
-
+  let user
   if (role === 'patient') {
-    user = await User.findOne({ email })
+    user = new User({ name, email, password, role, photo, gender })
   } else if (role === 'doctor') {
-    user = await Doctor.findOne({ email })
-  }
-
-  if (user) {
-    throw new CustomError.BadRequestError('User already exist')
-  }
-
-  if (role === 'patient') {
-    user = new User({
-      name,
-      email,
-      password,
-      role,
-      photo,
-      gender,
-    })
-  }
-  if (role === 'doctor') {
-    user = new Doctor({
-      name,
-      email,
-      password,
-      role,
-      photo,
-      gender,
-    })
+    user = new Doctor({ name, email, password, role, photo, gender })
+  } else if (role === 'admin') {
+    user = new User({ name, email, password, role, photo, gender })
+  } else {
+    throw new CustomError.BadRequestError('Invalid role')
   }
 
   await user.save()
@@ -58,15 +32,7 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   const { email, password } = req.body
-  let user = null
-  const patient = await User.findOne({ email })
-  const doctor = await Doctor.findOne({ email })
-  if (patient) {
-    user = patient
-  }
-  if (doctor) {
-    user = doctor
-  }
+  const user = (await User.findOne({ email })) || (await Doctor.findOne({ email }))
 
   if (!user) {
     throw new CustomError.NotFoundError('User not found')
@@ -76,12 +42,18 @@ const login = async (req, res) => {
   if (!isPasswordCorrect) {
     throw new CustomError.UnauthenticatedError('Invalid Credentials')
   }
+
   const tokenUser = createTokenUser(user)
-  res.status(StatusCodes.CREATED).json({ user: tokenUser })
+  attachCookiesToResponse(res, tokenUser)
+  res.status(StatusCodes.OK).json({ user: tokenUser })
 }
 
 const logout = async (req, res) => {
-  res.send('logout route')
+  res.cookie('token', 'logout', {
+    httpOnly: true,
+    expires: new Date(Date.now() + 1000),
+  })
+  res.status(StatusCodes.OK).json({ msg: 'User logged out' })
 }
 
 module.exports = {

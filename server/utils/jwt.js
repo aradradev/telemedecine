@@ -12,7 +12,7 @@ const isTokenValid = ({ token }) => {
 const attachCookiesToResponse = (res, user) => {
   const token = createJWT({ payload: user })
 
-  // time
+  // expiration time
   const oneDay = 1000 * 60 * 60 * 24
 
   res.cookie('token', token, {
