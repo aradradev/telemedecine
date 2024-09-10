@@ -42,8 +42,8 @@ const updateUser = async (req, res) => {
   }
 
   // Update user fields
-  user.name = name || user.name
-  user.email = email || user.email
+  user.name = name
+  user.email = email
 
   await user.save()
   const tokenUser = createTokenUser(user)
