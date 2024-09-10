@@ -3,13 +3,11 @@ const { StatusCodes } = require('http-status-codes')
 const CustomError = require('../errors')
 const { checkPermissions, attachCookiesToResponse, createTokenUser } = require('../utils')
 
-// Get All Users (for admin access only)
 const getAllUsers = async (req, res) => {
   const users = await User.find({ role: 'patient' }).select('-password')
   res.status(StatusCodes.OK).json({ users })
 }
 
-// Get a Single User (for admin or current user)
 const getSingleUser = async (req, res) => {
   const { id: userId } = req.params
   const user = await User.findOne({ _id: userId }).select('-password')
@@ -18,18 +16,15 @@ const getSingleUser = async (req, res) => {
     throw new CustomError.NotFoundError(`No user with id: ${userId}`)
   }
 
-  // Only allow access to admin or the same user
   checkPermissions(req.user, user._id)
   res.status(StatusCodes.OK).json({ user })
 }
 
-// Show Current Logged-in User
 const showCurrentUser = async (req, res) => {
   const currentUser = req.user
   res.status(StatusCodes.OK).json({ user: currentUser })
 }
 
-// Update User Profile
 const updateUser = async (req, res) => {
   const { name, email } = req.body
   console.log(req.body)
@@ -38,7 +33,6 @@ const updateUser = async (req, res) => {
     throw new CustomError.BadRequestError('Please provide both name and email')
   }
 
-  // Find the current user by the logged-in userId
   const user = await User.findOne({ _id: req.user.userId })
   console.log('user found', user)
 
@@ -50,13 +44,11 @@ const updateUser = async (req, res) => {
   user.name = name
   user.email = email
 
-  await user.save() // Save the updated user
+  await user.save()
   console.log('user updated', user)
 
-  // Generate a new token with the updated information
   const tokenUser = createTokenUser(user)
 
-  // Attach updated token to response
   attachCookiesToResponse({ res, user: tokenUser })
 
   res.status(StatusCodes.OK).json({
@@ -66,7 +58,6 @@ const updateUser = async (req, res) => {
   })
 }
 
-// Update User Password
 const updateUserPassword = async (req, res) => {
   const { oldPassword, newPassword } = req.body
   const user = await User.findOne({ _id: req.user.userId })
