@@ -32,10 +32,15 @@ const showCurrentUser = async (req, res) => {
 // Update User Profile
 const updateUser = async (req, res) => {
   const { name, email } = req.body
+  console.log(req.body)
   if (!name || !email) {
-    throw new CustomError.BadRequestError('Invalid Credentials')
+    console.log('Payload error')
+    throw new CustomError.BadRequestError('Please provide both name and email')
   }
+
+  // Find the current user by the logged-in userId
   const user = await User.findOne({ _id: req.user.userId })
+  console.log('user found', user)
 
   if (!user) {
     throw new CustomError.NotFoundError('User not found')
@@ -45,11 +50,20 @@ const updateUser = async (req, res) => {
   user.name = name
   user.email = email
 
-  await user.save()
+  await user.save() // Save the updated user
+  console.log('user updated', user)
+
+  // Generate a new token with the updated information
   const tokenUser = createTokenUser(user)
 
+  // Attach updated token to response
   attachCookiesToResponse({ res, user: tokenUser })
-  res.status(StatusCodes.OK).json({ success: true, message: 'User updated successfully', user: tokenUser })
+
+  res.status(StatusCodes.OK).json({
+    success: true,
+    message: 'User updated successfully',
+    user: tokenUser,
+  })
 }
 
 // Update User Password
