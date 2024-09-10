@@ -17,6 +17,7 @@ const app = express()
 
 // import routes
 const authRouter = require('./routes/authRoutes')
+const userRouter = require('./routes/userRoutes')
 
 // set up security
 const corsOptions = {
@@ -36,6 +37,7 @@ app.get('/', (req, res) => {
 
 // Path routes
 app.use('/api/v1/auth', authRouter)
+app.use('/api/v1/users', userRouter)
 
 // middleware not found && error handler...
 app.use(notFoundMiddleware)
