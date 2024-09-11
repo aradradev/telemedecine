@@ -1,5 +1,13 @@
+const { StatusCodes } = require('http-status-codes')
+const CustomError = require('../errors')
+const Doctor = require('../models/Doctor')
+const Review = require('../models/Review')
+
 const getAllReviews = async (req, res) => {
-  res.send('get all reviews')
+  const reviews = await Review.find({})
+    .populate({ path: 'doctor', select: 'name gender specialization' })
+    .populate({ path: 'user', select: 'name gender' })
+  res.status(StatusCodes.OK).json({ reviews })
 }
 const createReview = async (req, res) => {
   res.send('create review')
