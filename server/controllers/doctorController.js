@@ -32,7 +32,6 @@ const getAllDoctors = async (req, res) => {
     result = result.sort('createdAt')
   }
 
-  // Select specific fields
   if (fields) {
     const fieldList = fields.split(',').join(' ')
     result = result.select(fieldList)
