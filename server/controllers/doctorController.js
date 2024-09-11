@@ -1,14 +1,14 @@
 const Doctor = require('../models/Doctor')
+const { StatusCodes } = require('http-status-codes')
 
 const getAllDoctors = async (req, res) => {
-  res.send('get all doctors')
+  const doctors = await Doctor.find({}).select('-password')
+  res.status(StatusCodes.OK).json({ doctors })
 }
 const getSingleDoctor = async (req, res) => {
   res.send('get single doctor')
 }
-const showCurrentDoctor = async (req, res) => {
-  res.send('show current doctor')
-}
+
 const updateDoctor = async (req, res) => {
   res.send('update doctor')
 }
@@ -19,7 +19,6 @@ const deleteDoctor = async (req, res) => {
 module.exports = {
   getAllDoctors,
   getSingleDoctor,
-  showCurrentDoctor,
   updateDoctor,
   deleteDoctor,
 }
