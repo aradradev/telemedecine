@@ -15,7 +15,6 @@ const getAllDoctors = async (req, res) => {
     queryObject.name = { $regex: name, $options: 'i' }
   }
 
-  // Filter by minimum and maximum average rating
   if (minRating) {
     queryObject.averageRating = { $gte: Number(minRating) }
   }
