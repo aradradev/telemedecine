@@ -88,7 +88,7 @@ const deleteDoctor = async (req, res) => {
 
   checkPermissions(req.user, doctor._id)
 
-  await doctor.remove()
+  await doctor.deleteOne()
 
   res.status(StatusCodes.OK).json({ message: 'Doctor deleted successfully' })
 }
