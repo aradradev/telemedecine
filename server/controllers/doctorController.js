@@ -11,7 +11,6 @@ const getAllDoctors = async (req, res) => {
     queryObject.specialization = specialization
   }
 
-  // Search by name (case-insensitive)
   if (name) {
     queryObject.name = { $regex: name, $options: 'i' }
   }
