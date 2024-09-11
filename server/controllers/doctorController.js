@@ -22,7 +22,6 @@ const getAllDoctors = async (req, res) => {
     queryObject.averageRating = { ...queryObject.averageRating, $lte: Number(maxRating) }
   }
 
-  // Fetching the filtered data
   let result = Doctor.find(queryObject).select('-password')
 
   // Sorting the result
