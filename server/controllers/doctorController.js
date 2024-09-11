@@ -12,10 +12,14 @@ const showCurrentDoctor = async (req, res) => {
 const updateDoctor = async (req, res) => {
   res.send('update doctor')
 }
+const deleteDoctor = async (req, res) => {
+  res.send('delete doctor')
+}
 
 module.exports = {
   getAllDoctors,
   getSingleDoctor,
   showCurrentDoctor,
   updateDoctor,
+  deleteDoctor,
 }
