@@ -24,7 +24,6 @@ const getAllDoctors = async (req, res) => {
 
   let result = Doctor.find(queryObject).select('-password')
 
-  // Sorting the result
   if (sort) {
     const sortList = sort.split(',').join(' ')
     result = result.sort(sortList)
