@@ -19,6 +19,7 @@ const app = express()
 const authRouter = require('./routes/authRoutes')
 const userRouter = require('./routes/userRoutes')
 const doctorRouter = require('./routes/doctorRoutes')
+const reviewRouter = require('./routes/reviewRoutes')
 
 // set up security
 const corsOptions = {
@@ -40,6 +41,7 @@ app.get('/', (req, res) => {
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/doctors', doctorRouter)
+app.use('/api/v1/reviews', reviewRouter)
 
 // middleware not found && error handler...
 app.use(notFoundMiddleware)
