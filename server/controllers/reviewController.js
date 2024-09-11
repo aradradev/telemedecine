@@ -2,6 +2,7 @@ const { StatusCodes } = require('http-status-codes')
 const CustomError = require('../errors')
 const Doctor = require('../models/Doctor')
 const Review = require('../models/Review')
+const { checkPermissions } = require('../utils')
 
 const getAllReviews = async (req, res) => {
   const reviews = await Review.find({})
@@ -25,7 +26,18 @@ const createReview = async (req, res) => {
   res.status(StatusCodes.CREATED).json({ review })
 }
 const updateReview = async (req, res) => {
-  res.send('update review')
+  const { id: reviewId } = req.params
+  const { rating, reviewText } = req.body
+  const review = await Review.findOne({ _id: reviewId })
+  if (!review) {
+    throw new CustomError.NotFoundError(`No review with id: ${reviewId}`)
+  }
+
+  checkPermissions(req.user, review.user)
+  review.rating = rating
+  review.reviewText = reviewText
+  await review.save()
+  res.status(StatusCodes.OK).json({ review })
 }
 const deleteReview = async (req, res) => {
   res.send('delete review')
