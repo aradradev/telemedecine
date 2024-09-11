@@ -1,6 +1,7 @@
 const Doctor = require('../models/Doctor')
 const { StatusCodes } = require('http-status-codes')
 const CustomError = require('../errors')
+const { checkPermissions } = require('../utils')
 
 const getAllDoctors = async (req, res) => {
   const { specialization, name, minRating, maxRating, sort, fields } = req.query
@@ -55,7 +56,7 @@ const updateDoctor = async (req, res) => {
   const { name, email, phone, photo, specialization, qualifications, experiences, bio, ticketPrice, timeSlots } =
     req.body
 
-  const doctor = await Doctor.findById(doctorId)
+  const doctor = await Doctor.findById(doctorId).select('-password')
   if (!doctor) {
     throw new CustomError.NotFoundError(`No doctor with id: ${doctorId}`)
   }
@@ -71,6 +72,8 @@ const updateDoctor = async (req, res) => {
   if (ticketPrice) doctor.ticketPrice = ticketPrice
   if (timeSlots) doctor.timeSlots = timeSlots
 
+  checkPermissions(req.user, doctor._id)
+
   await doctor.save()
 
   res.status(StatusCodes.OK).json({ doctor, message: 'Doctor updated successfully' })
@@ -82,6 +85,8 @@ const deleteDoctor = async (req, res) => {
   if (!doctor) {
     throw new CustomError.NotFoundError(`No doctor with id: ${doctorId}`)
   }
+
+  checkPermissions(req.user, doctor._id)
 
   await doctor.remove()
 
