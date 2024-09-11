@@ -58,10 +58,12 @@ const DoctorSchema = new mongoose.Schema(
       enum: ['pending', 'approved', 'rejected'],
       default: 'pending',
     },
-    appointments: {
-      type: mongoose.Types.ObjectId,
-      ref: 'Appointment',
-    },
+    appointments: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: 'Appointment',
+      },
+    ],
   },
   { timestamps: true },
 )
