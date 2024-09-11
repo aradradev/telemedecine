@@ -11,12 +11,14 @@ const getAllReviews = async (req, res) => {
   res.status(StatusCodes.OK).json({ reviews })
 }
 const createReview = async (req, res) => {
-  const { id: doctorId } = req.body
+  const { doctor: doctorId } = req.body
+
   const isValidDoctor = await Doctor.findOne({ _id: doctorId })
   if (!isValidDoctor) {
     throw new CustomError.NotFoundError(`No Doctor with id: ${doctorId}`)
   }
 
+  console.log(req.user)
   req.body.user = req.user.userId
   const alreadyReviewed = await Review.findOne({ user: req.user.userId, doctor: doctorId })
   if (alreadyReviewed) {
