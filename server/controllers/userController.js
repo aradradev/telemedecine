@@ -40,7 +40,6 @@ const updateUser = async (req, res) => {
     throw new CustomError.NotFoundError('User not found')
   }
 
-  // Update user fields
   user.name = name
   user.email = email
 

@@ -5,7 +5,7 @@ const checkPermissions = (requestUser, resourceUserId) => {
   console.log(resourceUserId)
   console.log(typeof resourceUserId)
 
-  if (requestUser === 'admin') return
+  if (requestUser.role === 'admin') return
   if (requestUser.userId === resourceUserId.toString()) return
 
   throw new CustomError.UnauthorizedError('Your are not allowed to access this route')
