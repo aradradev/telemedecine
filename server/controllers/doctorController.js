@@ -6,7 +6,7 @@ const { checkPermissions } = require('../utils')
 const getAllDoctors = async (req, res) => {
   const { specialization, name, minRating, maxRating, sort, fields } = req.query
 
-  const queryObject = {}
+  const queryObject = { isApproved: 'approved' }
 
   if (specialization) {
     queryObject.specialization = specialization
