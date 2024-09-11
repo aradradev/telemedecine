@@ -3,8 +3,50 @@ const { StatusCodes } = require('http-status-codes')
 const CustomError = require('../errors')
 
 const getAllDoctors = async (req, res) => {
-  const doctors = await Doctor.find({}).select('-password')
-  res.status(StatusCodes.OK).json({ doctors })
+  const { specialization, name, minRating, maxRating, sort, fields } = req.query
+
+  // Building the query object for filtering
+  const queryObject = {}
+
+  // Filter by specialization
+  if (specialization) {
+    queryObject.specialization = specialization
+  }
+
+  // Search by name (case-insensitive)
+  if (name) {
+    queryObject.name = { $regex: name, $options: 'i' }
+  }
+
+  // Filter by minimum and maximum average rating
+  if (minRating) {
+    queryObject.averageRating = { $gte: Number(minRating) }
+  }
+  if (maxRating) {
+    queryObject.averageRating = { ...queryObject.averageRating, $lte: Number(maxRating) }
+  }
+
+  // Fetching the filtered data
+  let result = Doctor.find(queryObject).select('-password')
+
+  // Sorting the result
+  if (sort) {
+    const sortList = sort.split(',').join(' ')
+    result = result.sort(sortList)
+  } else {
+    result = result.sort('createdAt')
+  }
+
+  // Select specific fields
+  if (fields) {
+    const fieldList = fields.split(',').join(' ')
+    result = result.select(fieldList)
+  }
+
+  // Execute the query
+  const doctors = await result
+
+  res.status(StatusCodes.OK).json({ doctors, count: doctors.length })
 }
 
 const getSingleDoctor = async (req, res) => {
