@@ -44,7 +44,7 @@ const login = async (req, res) => {
   }
 
   const tokenUser = createTokenUser(user)
-  attachCookiesToResponse({ res, tokenUser })
+  attachCookiesToResponse({ res, user: tokenUser })
   res.status(StatusCodes.OK).json({ success: true, message: 'User successfully logged in.', user: tokenUser })
 }
 
