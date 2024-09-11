@@ -2,9 +2,12 @@ const User = require('../models/User')
 const { StatusCodes } = require('http-status-codes')
 const CustomError = require('../errors')
 const { checkPermissions, attachCookiesToResponse, createTokenUser } = require('../utils')
+const Doctor = require('../models/Doctor')
 
 const getAllUsers = async (req, res) => {
-  const users = await User.find({ role: 'patient' }).select('-password')
+  const patients = await User.find({ role: 'patient' }).select('-password')
+  const doctors = await Doctor.find({ role: 'doctor' }).select('-password')
+  const users = [...patients, ...doctors]
   res.status(StatusCodes.OK).json({ users })
 }
 
