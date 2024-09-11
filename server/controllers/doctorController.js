@@ -7,7 +7,6 @@ const getAllDoctors = async (req, res) => {
 
   const queryObject = {}
 
-  // Filter by specialization
   if (specialization) {
     queryObject.specialization = specialization
   }
