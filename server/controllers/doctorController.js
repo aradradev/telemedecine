@@ -5,7 +5,6 @@ const CustomError = require('../errors')
 const getAllDoctors = async (req, res) => {
   const { specialization, name, minRating, maxRating, sort, fields } = req.query
 
-  // Building the query object for filtering
   const queryObject = {}
 
   // Filter by specialization
