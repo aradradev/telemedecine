@@ -8,7 +8,7 @@ const getAllReviews = async (req, res) => {
   const reviews = await Review.find({})
     .populate({ path: 'doctor', select: 'name gender specialization' })
     .populate({ path: 'user', select: 'name gender' })
-  res.status(StatusCodes.OK).json({ reviews })
+  res.status(StatusCodes.OK).json({ reviews, count: reviews.length })
 }
 const createReview = async (req, res) => {
   const { doctor: doctorId } = req.body
