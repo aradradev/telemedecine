@@ -10,7 +10,19 @@ const getAllReviews = async (req, res) => {
   res.status(StatusCodes.OK).json({ reviews })
 }
 const createReview = async (req, res) => {
-  res.send('create review')
+  const { id: doctorId } = req.body
+  const isValidDoctor = await Doctor.findOne({ _id: doctorId })
+  if (!isValidDoctor) {
+    throw new CustomError.NotFoundError(`No Doctor with id: ${doctorId}`)
+  }
+
+  req.body.user = req.user.userId
+  const alreadyReviewed = await Review.findOne({ user: req.user.userId, doctor: doctorId })
+  if (alreadyReviewed) {
+    throw new CustomError.BadRequestError('Already submitted review for this doctor')
+  }
+  const review = await Review.create(req.body)
+  res.status(StatusCodes.CREATED).json({ review })
 }
 const updateReview = async (req, res) => {
   res.send('update review')
