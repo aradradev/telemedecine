@@ -5,7 +5,7 @@ const { authenticateUser, authorizedPermissions } = require('../middleware/authe
 
 const router = express.Router()
 
-router.route('/').get(authenticateUser, getAllDoctors)
+router.route('/').get(getAllDoctors)
 
 router
   .route('/:id')
