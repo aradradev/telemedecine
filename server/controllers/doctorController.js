@@ -1,3 +1,5 @@
+const Doctor = require('../models/Doctor')
+
 const getAllDoctors = async (req, res) => {
   res.send('get all doctors')
 }
