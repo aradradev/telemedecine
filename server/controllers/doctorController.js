@@ -37,7 +37,6 @@ const getAllDoctors = async (req, res) => {
     result = result.select(fieldList)
   }
 
-  // Execute the query
   const doctors = await result
 
   res.status(StatusCodes.OK).json({ doctors, count: doctors.length })
