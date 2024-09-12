@@ -3,7 +3,11 @@ const { getAllDoctors, updateDoctor, deleteDoctor, getSingleDoctor } = require('
 
 const { authenticateUser, authorizedPermissions } = require('../middleware/authentication')
 
+const reviewRouter = require('./reviewRoutes')
+
 const router = express.Router()
+
+// nested router for review
 
 router.route('/').get(getAllDoctors)
 
