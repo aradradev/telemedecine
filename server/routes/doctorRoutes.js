@@ -8,6 +8,7 @@ const reviewRouter = require('./reviewRoutes')
 const router = express.Router()
 
 // nested router for review
+router.use('/:doctorId/reviews', reviewRouter)
 
 router.route('/').get(getAllDoctors)
 
