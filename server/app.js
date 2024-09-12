@@ -2,6 +2,10 @@ const express = require('express')
 require('dotenv').config()
 require('express-async-errors')
 
+// middleware built in import
+const cors = require('cors')
+const cookieParser = require('cookie-parser')
+
 // import Database
 const connectDB = require('./db/connect')
 
@@ -11,14 +15,35 @@ const errorHandlerMiddleware = require('./middleware/error-handler')
 
 const app = express()
 
-// middleware
-app.use(express.json())
+// import routes
+const authRouter = require('./routes/authRoutes')
+const userRouter = require('./routes/userRoutes')
+const doctorRouter = require('./routes/doctorRoutes')
+const reviewRouter = require('./routes/reviewRoutes')
+const bookingRouter = require('./routes/bookingRoutes')
 
-const port = process.env.PORT || 3000
+// set up security
+const corsOptions = {
+  origin: true,
+}
+app.use(cors(corsOptions))
+
+// middleware built in
+app.use(express.json())
+app.use(cookieParser(process.env.JWT_SECRET))
+
+const port = process.env.PORT || 5000
 
 app.get('/', (req, res) => {
   res.send('Hello World')
 })
+
+// Path routes
+app.use('/api/v1/auth', authRouter)
+app.use('/api/v1/users', userRouter)
+app.use('/api/v1/doctors', doctorRouter)
+app.use('/api/v1/reviews', reviewRouter)
+app.use('/api/v1/bookings', bookingRouter)
 
 // middleware not found && error handler...
 app.use(notFoundMiddleware)
