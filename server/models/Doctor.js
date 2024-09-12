@@ -39,6 +39,7 @@ const DoctorSchema = new mongoose.Schema(
     experiences: { type: Array },
     bio: { type: String, maxlength: 500 },
     timeSlots: { type: Array },
+    reviews: [{ type: mongoose.Types.ObjectId, ref: 'Review' }],
     averageRating: {
       type: Number,
       default: 0,
