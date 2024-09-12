@@ -10,7 +10,10 @@ const getAllReviews = async (req, res) => {
 }
 
 const createReview = async (req, res) => {
-  const { doctor: doctorId } = req.body
+  const { doctorId } = req.params
+
+  req.body.doctor = doctorId
+  req.body.user = req.user.userId
 
   const isValidDoctor = await Doctor.findOne({ _id: doctorId })
   if (!isValidDoctor) {

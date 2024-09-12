@@ -60,15 +60,8 @@ const DoctorSchema = new mongoose.Schema(
       },
     ],
   },
-  { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } },
+  { timestamps: true },
 )
-
-DoctorSchema.virtual('reviewList', {
-  ref: 'Review',
-  localField: '_id',
-  foreignField: 'doctor',
-  justOne: false,
-})
 
 DoctorSchema.pre('save', async function () {
   if (!this.isModified('password')) return

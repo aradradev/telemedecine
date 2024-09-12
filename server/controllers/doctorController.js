@@ -45,7 +45,7 @@ const getAllDoctors = async (req, res) => {
 const getSingleDoctor = async (req, res) => {
   const { id: doctorId } = req.params
   const doctor = await Doctor.findById(doctorId)
-    .populate({ path: 'reviewList', select: 'user reviewText rating' })
+    .populate({ path: 'reviews', select: 'user reviewText rating' })
     .select('-password')
   if (!doctor) {
     throw new CustomError.NotFoundError(`No doctor with id: ${doctorId}`)
