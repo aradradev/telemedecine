@@ -42,7 +42,7 @@ ReviewSchema.statics.calculateAverageRating = async function (doctorId) {
       },
     },
   ])
-  console.log(stats)
+  // console.log(stats)
   await Doctor.findByIdAndUpdate(doctorId, {
     totalRating: stats[0].numOfReviews,
     averageRating: stats[0].averageRating,
