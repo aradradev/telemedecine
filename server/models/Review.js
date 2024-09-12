@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const Doctor = require('../models/Doctor')
 
 const ReviewSchema = new mongoose.Schema(
   {
@@ -42,6 +43,10 @@ ReviewSchema.statics.calculateAverageRating = async function (doctorId) {
     },
   ])
   console.log(stats)
+  await Doctor.findByIdAndUpdate(doctorId, {
+    totalRating: stats[0].numOfReviews,
+    averageRating: stats[0].averageRating,
+  })
 }
 
 ReviewSchema.post('save', function () {
