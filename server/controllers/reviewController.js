@@ -10,30 +10,25 @@ const getAllReviews = async (req, res) => {
 }
 
 const createReview = async (req, res) => {
-  // const { doctor: doctorId } = req.body
+  const { doctor: doctorId } = req.body
 
-  // const isValidDoctor = await Doctor.findOne({ _id: doctorId })
-  // if (!isValidDoctor) {
-  //   throw new CustomError.NotFoundError(`No Doctor with id: ${doctorId}`)
-  // }
+  const isValidDoctor = await Doctor.findOne({ _id: doctorId })
+  if (!isValidDoctor) {
+    throw new CustomError.NotFoundError(`No Doctor with id: ${doctorId}`)
+  }
 
-  // req.body.user = req.user.userId
+  req.body.user = req.user.userId
 
-  // const alreadyReviewed = await Review.findOne({ user: req.user.userId, doctor: doctorId })
-  // if (alreadyReviewed) {
-  //   console.log('Already reviewed? ', alreadyReviewed)
-  //   throw new CustomError.BadRequestError('Already submitted review for this doctor')
-  // }
+  const alreadyReviewed = await Review.findOne({ user: req.user.userId, doctor: doctorId })
+  if (alreadyReviewed) {
+    throw new CustomError.BadRequestError('You have already submitted a review for this doctor')
+  }
 
-  // const review = await Review.create(req.body)
-  // res.status(StatusCodes.CREATED).json({ review })
+  const review = await Review.create(req.body)
 
-  if (!req.body.doctor) req.body.doctor = req.params.doctorId
-  if (!req.body.user) req.body.user = req.userId
+  await Doctor.findByIdAndUpdate(doctorId, { $push: { reviews: review._id } })
 
-  const newReview = new Review(req.body)
-  const savedReview = await newReview.save()
-  await Doctor.findByIdAndUpdate(req.body.doctor, { $push: { reviews: savedReview._id } })
+  res.status(StatusCodes.CREATED).json({ status: true, message: 'Review submitted successfully', review })
 }
 
 const updateReview = async (req, res) => {
