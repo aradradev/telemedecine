@@ -18,14 +18,14 @@ const createReview = async (req, res) => {
   }
 
   req.body.user = req.user.userId
+
   const alreadyReviewed = await Review.findOne({ user: req.user.userId, doctor: doctorId })
+  console.log('Already reviewed? ', alreadyReviewed)
   if (alreadyReviewed) {
     throw new CustomError.BadRequestError('Already submitted review for this doctor')
   }
-  const review = await Review.create(req.body)
 
-  isValidDoctor.reviews.push(review._id)
-  await isValidDoctor.save()
+  const review = await Review.create(req.body)
   res.status(StatusCodes.CREATED).json({ review })
 }
 
