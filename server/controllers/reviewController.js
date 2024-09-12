@@ -15,13 +15,6 @@ const createReview = async (req, res) => {
   req.body.doctor = doctorId
   req.body.user = req.user.userId
 
-  const isValidDoctor = await Doctor.findOne({ _id: doctorId })
-  if (!isValidDoctor) {
-    throw new CustomError.NotFoundError(`No Doctor with id: ${doctorId}`)
-  }
-
-  req.body.user = req.user.userId
-
   const alreadyReviewed = await Review.findOne({ user: req.user.userId, doctor: doctorId })
   if (alreadyReviewed) {
     throw new CustomError.BadRequestError('You have already submitted a review for this doctor')
