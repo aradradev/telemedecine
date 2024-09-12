@@ -11,7 +11,6 @@ const getAllReviews = async (req, res) => {
 
 const createReview = async (req, res) => {
   const { doctorId } = req.params
-
   req.body.doctor = doctorId
   req.body.user = req.user.userId
 
