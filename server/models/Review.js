@@ -64,5 +64,8 @@ ReviewSchema.statics.calculateAverageRating = async function (doctorId) {
 ReviewSchema.post('save', async function () {
   await this.constructor.calculateAverageRating(this.doctor)
 })
+ReviewSchema.post('deleteOne', { document: true, query: false }, async function () {
+  await this.constructor.calculateAverageRating(this.doctor)
+})
 
 module.exports = mongoose.model('Review', ReviewSchema)
