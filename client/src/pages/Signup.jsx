@@ -5,6 +5,7 @@ import { useState } from 'react'
 import uploadImageToCloudinary from '../utils/uploadCloudinary'
 import { BASE_URL } from '../config'
 import { toast } from 'react-toastify'
+import HashLoader from 'react-spinners/HashLoader'
 
 const Signup = () => {
   const [selectedFile, setSelectedFile] = useState(null)
@@ -133,9 +134,11 @@ const Signup = () => {
                 </label>
               </div>
               <div className='mb-5 flex items-center gap-3'>
-                <figure className='w-[60px] h-[60px] rounded-full border-2 border-solid border-primaryColor flex items-center justify-center'>
-                  <img src={avatar} alt='avatar' className='rounded-full w-full' />
-                </figure>
+                {selectedFile && (
+                  <figure className='w-[60px] h-[60px] rounded-full border-2 border-solid border-primaryColor flex items-center justify-center'>
+                    <img src={previewURL} alt='avatar' className='rounded-full w-full' />
+                  </figure>
+                )}
                 <div className='relative w-[130px] h-[50px]'>
                   <input
                     type='file'
@@ -154,9 +157,10 @@ const Signup = () => {
               </div>
               <div className='mt-5'>
                 <button
+                  disabled={loading && true}
                   className='bg-primaryColor text-white w-full py-3 px-4 text-[18px] rounded-lg leading-[30px]'
                   type='submit'>
-                  Sign Up
+                  {loading ? <HashLoader size={35} color='#ffffff' /> : 'Sign Up'}
                 </button>
               </div>
               <p className='mt-5 text-textColor text-center'>
