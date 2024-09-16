@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { authContext } from '../context/authContext.js'
@@ -13,6 +13,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate()
+  const { dispatch } = useContext(authContext)
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -36,9 +37,18 @@ const Login = () => {
         throw new Error(result.message)
       }
 
+      dispatch({
+        type: 'LOGIN_SUCCESS',
+        payload: {
+          user: result.user,
+          token: result.token,
+          role: result.role,
+        },
+      })
+
       setLoading(false)
       toast.success(result.message)
-      navigate('/login')
+      navigate('/home')
     } catch (err) {
       toast.error(err.message)
       setLoading(false)
