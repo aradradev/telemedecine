@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { authContext } from '../context/authContext.js'
+import { authContext } from '../context/AuthContext.jsx'
 import { BASE_URL } from '../config'
 import HashLoader from 'react-spinners/HashLoader.js'
 
@@ -25,7 +25,7 @@ const Login = () => {
     setLoading(true)
 
     try {
-      const res = await fetch(`${BASE_URL}/auth/register`, {
+      const res = await fetch(`${BASE_URL}/auth/login`, {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
