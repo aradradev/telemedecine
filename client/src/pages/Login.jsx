@@ -33,7 +33,7 @@ const Login = () => {
         body: JSON.stringify(formData),
       })
       const result = await res.json()
-      console.log(result)
+
       if (!res.ok) {
         throw new Error(result.message)
       }
@@ -46,6 +46,8 @@ const Login = () => {
           role: result.role,
         },
       })
+
+      console.log(result, 'login data')
 
       setLoading(false)
       toast.success(result.message)
