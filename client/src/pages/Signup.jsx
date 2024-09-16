@@ -23,7 +23,9 @@ const Signup = () => {
 
   const handleFileInputChange = async (e) => {
     const file = e.target.files[0]
-    console.log(file)
+    const data = await uploadImageToCloudinary(file)
+    console.log(data)
+    // console.log(file)
   }
 
   const submitHandler = async (e) => {
