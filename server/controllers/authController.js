@@ -2,7 +2,7 @@ const User = require('../models/User')
 const Doctor = require('../models/Doctor')
 const CustomError = require('../errors')
 const { StatusCodes } = require('http-status-codes')
-const { createTokenUser, attachCookiesToResponse } = require('../utils')
+const { createTokenUser, attachCookiesToResponse, isTokenValid } = require('../utils')
 
 const register = async (req, res) => {
   const { name, email, password, role: userRole, photo, gender } = req.body
@@ -56,8 +56,19 @@ const logout = async (req, res) => {
   res.status(StatusCodes.OK).json({ msg: 'User logged out' })
 }
 
+const getCurrentUser =async (req,res)=>{
+  const token = req.signedCookies.token
+  if(!token){
+    throw new CustomError.UnauthenticatedError('Authentication Invalid')
+  }
+
+  const { name, email, role, photo } = isTokenValid({ token })
+  res.status(StatusCodes.OK).json({success:true, user: name, email, role, photo})
+}
+
 module.exports = {
   register,
   login,
   logout,
+  getCurrentUser,
 }

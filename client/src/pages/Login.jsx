@@ -47,8 +47,6 @@ const Login = () => {
         },
       })
 
-      console.log(result, 'login data')
-
       setLoading(false)
       toast.success(result.message)
       navigate('/home')

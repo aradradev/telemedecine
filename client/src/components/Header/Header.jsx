@@ -4,7 +4,7 @@ import { NavLink, Link, useNavigate } from 'react-router-dom'
 import { BiMenu } from 'react-icons/bi'
 import logo from '../../assets/images/vector/logoBlack.svg'
 import userImg from '../../assets/images/avatar-icon.png'
-import { useAuth } from '../../context/AuthContext' // Import the context
+import { useAuth } from '../../context/AuthContext' // Import the context\
 
 const navLinks = [
   { path: '/home', display: 'Home' },
@@ -68,9 +68,9 @@ const Header = () => {
             {user ? (
               <>
                 {/* Show user avatar if logged in */}
-                <Link to='/profile'>
+                <Link to={`${user.role === 'doctor' ? '/doctors/profile/me' : '/users/profile/me'}`}>
                   <figure className='w-[35px] h-[35px] rounded-full cursor-pointer'>
-                    <img src={userImg} className='w-full rounded-full' alt='User Avatar' />
+                    <img src={user?.photo} className='w-full rounded-full' alt='User Avatar' />
                   </figure>
                 </Link>
                 {/* Logout Button */}
