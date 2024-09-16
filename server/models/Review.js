@@ -43,14 +43,26 @@ ReviewSchema.statics.calculateAverageRating = async function (doctorId) {
     },
   ])
   // console.log(stats)
-  await Doctor.findByIdAndUpdate(doctorId, {
-    totalRating: stats[0].numOfReviews,
-    averageRating: stats[0].averageRating,
-  })
+  // await Doctor.findByIdAndUpdate(doctorId, {
+  //   totalRating: stats[0].numOfReviews,
+  //   averageRating: stats[0].averageRating,
+  // })
+
+  try {
+    await this.model('Doctor').findOneAndUpdate(
+      { _id: doctorId },
+      {
+        averageRating: Math.ceil(stats[0]?.averageRating || 0),
+        totalRating: Math.ceil(stats[0]?.numOfReviews || 0),
+      },
+    )
+  } catch (error) {
+    console.log(error)
+  }
 }
 
-ReviewSchema.post('save', function () {
-  this.constructor.calculateAverageRating(this.doctor)
+ReviewSchema.post('save', async function () {
+  await this.constructor.calculateAverageRating(this.doctor)
 })
 
 module.exports = mongoose.model('Review', ReviewSchema)
