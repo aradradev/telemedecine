@@ -24,8 +24,10 @@ const Signup = () => {
   const handleFileInputChange = async (e) => {
     const file = e.target.files[0]
     const data = await uploadImageToCloudinary(file)
-    console.log(data)
-    // console.log(file)
+    // console.log(data)
+    setPreviewURL(data.url)
+    setSelectedFile(data.url)
+    setFormData({ ...formData, photo: data.url })
   }
 
   const submitHandler = async (e) => {
