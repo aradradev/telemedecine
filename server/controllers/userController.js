@@ -3,6 +3,7 @@ const { StatusCodes } = require('http-status-codes')
 const CustomError = require('../errors')
 const { checkPermissions, attachCookiesToResponse, createTokenUser } = require('../utils')
 const Doctor = require('../models/Doctor')
+const Booking = require('../models/Booking')
 
 const getAllUsers = async (req, res) => {
   const patients = await User.find({ role: 'patient' }).select('-password')
@@ -76,6 +77,19 @@ const updateUserPassword = async (req, res) => {
   user.password = newPassword
   await user.save()
   res.status(StatusCodes.OK).json({ success: true, message: 'Password updated successfully' })
+}
+
+const getMyAppointments = async (req, res) => {
+  // step-1: retrieve appointment from booking for specific user
+  const bookings = await Booking.find({ user: req.user.userId })
+
+  // step-2: extract doctor ids from appointments booking
+  const doctorIds = bookings.map((el) => el.doctor.id)
+
+  // step-3: retrieve doctors using doctor ids
+  const doctors = await Doctor.find({ _id: { $in: doctorIds } }).select('-password')
+
+  res.status(StatusCodes.OK).json({})
 }
 
 module.exports = {
