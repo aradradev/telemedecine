@@ -6,6 +6,9 @@ import Login from '../pages/Login'
 import Signup from '../pages/Signup'
 import Contact from '../pages/Contact'
 import Services from '../pages/Services'
+import MyAccount from '../Dashboard/user-account/MyAccount'
+import Dashboard from '../Dashboard/doctor-account/Dashboard'
+import AdminDashboard from '../Dashboard/admin-account/AdminDashboard'
 
 const Routers = () => {
   return (
@@ -18,6 +21,9 @@ const Routers = () => {
       <Route path='/register' element={<Signup />} />
       <Route path='/contact' element={<Contact />} />
       <Route path='/services' element={<Services />} />
+      <Route path='/users/profile/me' element={<MyAccount />} />
+      <Route path='/doctors/profile/me' element={<Dashboard />} />
+      <Route path='/admin' element={<AdminDashboard />} />
     </Routes>
   )
 }

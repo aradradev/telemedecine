@@ -2,6 +2,7 @@ const Doctor = require('../models/Doctor')
 const { StatusCodes } = require('http-status-codes')
 const CustomError = require('../errors')
 const { checkPermissions } = require('../utils')
+const Booking = require('../models/Booking')
 
 const getAllDoctors = async (req, res) => {
   const { specialization, name, minRating, maxRating, sort, fields } = req.query
@@ -102,7 +103,10 @@ const getDoctorProfile = async (req, res) => {
     throw new CustomError.NotFoundError(`No doctor with id: ${doctorId}`)
   }
 
-  res.status(StatusCodes.OK).json({ doctor })
+  // get appointment from the Booking
+  const appointments = await Booking.find({ doctor: doctorId })
+
+  res.status(StatusCodes.OK).json({ doctor, appointments })
 }
 
 module.exports = {
