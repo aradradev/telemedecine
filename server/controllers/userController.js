@@ -80,21 +80,20 @@ const updateUserPassword = async (req, res) => {
 }
 
 const getMyAppointments = async (req, res) => {
-  // step-1: retrieve appointment from booking for specific user
-  const bookings = await Booking.find({ user: req.user.userId }).populate('doctor', 'name email specialty')
+  const bookings = await Booking.find({ user: req.user.userId }).populate('doctor', 'name email specialization')
 
- if(!bookings.length){
-  throw new CustomError.NotFoundError('No appointments found for this user')
- }
+  if (!bookings.length) {
+    throw new CustomError.NotFoundError('No appointments found for this user')
+  }
 
-
-  res.status(StatusCodes.OK).json({status: true, 
-    appointments: bookings.map(booking =>({
+  res.status(StatusCodes.OK).json({
+    status: true,
+    appointments: bookings.map((booking) => ({
       bookingId: booking._id,
       date: booking.date,
       status: booking.status,
-      doctor: booking.doctor
-    }))
+      doctor: booking.doctor,
+    })),
   })
 }
 
@@ -104,5 +103,5 @@ module.exports = {
   showCurrentUser,
   updateUser,
   updateUserPassword,
-  getMyAppointments
+  getMyAppointments,
 }
