@@ -81,15 +81,21 @@ const updateUserPassword = async (req, res) => {
 
 const getMyAppointments = async (req, res) => {
   // step-1: retrieve appointment from booking for specific user
-  const bookings = await Booking.find({ user: req.user.userId })
+  const bookings = await Booking.find({ user: req.user.userId }).populate('doctor', 'name email specialty')
 
-  // step-2: extract doctor ids from appointments booking
-  const doctorIds = bookings.map((el) => el.doctor.id)
+ if(!bookings.length){
+  throw new CustomError.NotFoundError('No appointments found for this user')
+ }
 
-  // step-3: retrieve doctors using doctor ids
-  const doctors = await Doctor.find({ _id: { $in: doctorIds } }).select('-password')
 
-  res.status(StatusCodes.OK).json({})
+  res.status(StatusCodes.OK).json({status: true, 
+    appointments: bookings.map(booking =>({
+      bookingId: booking._id,
+      date: booking.date,
+      status: booking.status,
+      doctor: booking.doctor
+    }))
+  })
 }
 
 module.exports = {
@@ -98,4 +104,5 @@ module.exports = {
   showCurrentUser,
   updateUser,
   updateUserPassword,
+  getMyAppointments
 }
