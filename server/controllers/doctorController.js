@@ -95,9 +95,20 @@ const deleteDoctor = async (req, res) => {
   res.status(StatusCodes.OK).json({ message: 'Doctor deleted successfully' })
 }
 
+const getDoctorProfile = async (req, res) => {
+  const doctorId = req.user.userId
+  const doctor = await Doctor.findById(doctorId).select('-password')
+  if (!doctor) {
+    throw new CustomError.NotFoundError(`No doctor with id: ${doctorId}`)
+  }
+
+  res.status(StatusCodes.OK).json({ doctor })
+}
+
 module.exports = {
   getAllDoctors,
   getSingleDoctor,
   updateDoctor,
   deleteDoctor,
+  getDoctorProfile,
 }
