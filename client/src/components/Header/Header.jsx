@@ -70,7 +70,7 @@ const Header = () => {
                 {/* Show user avatar if logged in */}
                 <Link to={`${user.role === 'doctor' ? '/doctors/profile/me' : '/users/profile/me'}`}>
                   <figure className='w-[35px] h-[35px] rounded-full cursor-pointer'>
-                    <img src={user?.photo} className='w-full rounded-full' alt='User Avatar' />
+                    <img src={user?.photo || userImg} className='w-full rounded-full' alt='User Avatar' />
                   </figure>
                 </Link>
                 {/* Logout Button */}

@@ -56,14 +56,14 @@ const logout = async (req, res) => {
   res.status(StatusCodes.OK).json({ msg: 'User logged out' })
 }
 
-const getCurrentUser =async (req,res)=>{
+const getCurrentUser = async (req, res) => {
   const token = req.signedCookies.token
-  if(!token){
+  if (!token) {
     throw new CustomError.UnauthenticatedError('Authentication Invalid')
   }
 
   const { name, email, role, photo } = isTokenValid({ token })
-  res.status(StatusCodes.OK).json({success:true, user: name, email, role, photo})
+  res.status(StatusCodes.OK).json({ success: true, user: { name, email, role, photo } })
 }
 
 module.exports = {
