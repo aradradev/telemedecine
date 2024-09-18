@@ -9,6 +9,7 @@ import Services from '../pages/Services'
 import MyAccount from '../Dashboard/user-account/MyAccount'
 import Dashboard from '../Dashboard/doctor-account/Dashboard'
 import AdminDashboard from '../Dashboard/admin-account/AdminDashboard'
+import ProtectedRoute from './ProtectedRoute'
 
 const Routers = () => {
   return (
@@ -21,7 +22,16 @@ const Routers = () => {
       <Route path='/register' element={<Signup />} />
       <Route path='/contact' element={<Contact />} />
       <Route path='/services' element={<Services />} />
-      <Route path='/users/profile/me' element={<MyAccount />} />
+
+      {/** Protected routes */}
+      <Route
+        path='/users/profile/me'
+        element={
+          <ProtectedRoute allowedRoles={['user']}>
+            <MyAccount />
+          </ProtectedRoute>
+        }
+      />
       <Route path='/doctors/profile/me' element={<Dashboard />} />
       <Route path='/admin' element={<AdminDashboard />} />
     </Routes>
