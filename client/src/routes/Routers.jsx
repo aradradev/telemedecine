@@ -32,8 +32,22 @@ const Routers = () => {
           </ProtectedRoute>
         }
       />
-      <Route path='/doctors/profile/me' element={<Dashboard />} />
-      <Route path='/admin' element={<AdminDashboard />} />
+      <Route
+        path='/doctors/profile/me'
+        element={
+          <ProtectedRoute allowedRoles={['doctor']}>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path='/admin'
+        element={
+          <ProtectedRoute allowedRoles={['doctor']}>
+            <AdminDashboard />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   )
 }
