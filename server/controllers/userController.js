@@ -29,7 +29,7 @@ const showCurrentUser = async (req, res) => {
   if (!currentUser) {
     throw new CustomError.NotFoundError('User not found')
   }
-  console.log(currentUser)
+  // console.log(currentUser)
   res.status(StatusCodes.OK).json({ user: currentUser })
 }
 
