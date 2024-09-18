@@ -25,10 +25,11 @@ const getSingleUser = async (req, res) => {
 }
 
 const showCurrentUser = async (req, res) => {
-  const currentUser = await User.findById(req.user.userId).select('-password').populate('appointments')
+  const currentUser = await User.findById(req.user.userId).select('-password')
   if (!currentUser) {
     throw new CustomError.NotFoundError('User not found')
   }
+  console.log(currentUser)
   res.status(StatusCodes.OK).json({ user: currentUser })
 }
 
