@@ -16,8 +16,8 @@ const useFetchData = (url) => {
           credentials: 'include',
         })
 
-        if (!response) {
-          throw new Error('Failed to fetch data 🤢')
+        if (!response.ok) {
+          throw new Error('Failed to fetch data 🤢', response.message)
         }
         const result = await response.json()
         setData(result)
