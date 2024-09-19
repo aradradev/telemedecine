@@ -17,12 +17,14 @@ const useFetchData = (url) => {
         })
 
         if (!response.ok) {
-          throw new Error('Failed to fetch data 🤢', response.message)
+          const errorMessage = `Error ${response.status}: ${response.statusText || 'Failed to fetch data'}`
+          console.error('Error fetching data:', errorMessage) // Log detailed error
+          throw new Error(errorMessage)
         }
         const result = await response.json()
         setData(result)
       } catch (err) {
-        setError(err.message)
+        setError(err.message || 'Something went wrong')
       } finally {
         setLoading(false)
       }

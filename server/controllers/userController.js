@@ -84,7 +84,10 @@ const updateUserPassword = async (req, res) => {
 }
 
 const getMyAppointments = async (req, res) => {
+  console.log('fetching appointments for users: ', req.user.userId)
   const bookings = await Booking.find({ user: req.user.userId }).populate('doctor', 'name email specialization')
+
+  console.log('Found bookings: ', bookings)
 
   if (!bookings.length) {
     throw new CustomError.NotFoundError('No appointments found for this user')

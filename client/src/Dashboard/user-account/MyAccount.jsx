@@ -10,7 +10,7 @@ import Error from '../../components/Error/Error'
 const MyAccount = () => {
   const [tab, setTab] = useState('bookings')
   const { data: user, loading, error } = useFetchData(`${BASE_URL}/users/profile/me`)
-  console.log(`userFetchData: ${JSON.stringify(user)}`)
+  // console.log(`userFetchData: ${JSON.stringify(user)}`)
   return (
     <section>
       <div className='max-w-[1170px] px-5 mx-auto'>
