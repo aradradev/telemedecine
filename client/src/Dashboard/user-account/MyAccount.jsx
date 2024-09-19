@@ -1,4 +1,3 @@
-import { useAuth } from '../../context/AuthContext'
 import userImg from '../../assets/images/avatar-icon.png'
 import { useState } from 'react'
 import MyBookings from './MyBookings'
@@ -20,15 +19,18 @@ const MyAccount = () => {
             <div className='pb-[50px] px-[30px] rounded-md'>
               <div className='flex items-center justify-center'>
                 <figure className='w-[100px] h-[100px] rounded-full border-2 border-solid border-primaryColor`'>
-                  <img src={user.user?.photo || userImg} alt='avatar' className='w-full h-full rounded-full' />
+                  <img src={user?.user?.photo || userImg} alt='avatar' className='w-full h-full rounded-full' />
                 </figure>
               </div>
 
               <div className='text-center mt-4'>
                 <h2 className='text-2xl font-bold text-headingColor'>{user?.name}</h2>
-                <p className='text-textColor text-[15px] leading-6 font-medium'>{user?.email || 'example@mail.com'}</p>
                 <p className='text-textColor text-[15px] leading-6 font-medium'>
-                  Blood Type:<span className='ml-2 text-headingColor text-[22px] leading-8'>o-</span>
+                  {user?.user?.email || 'example@mail.com'}
+                </p>
+                <p className='text-textColor text-[15px] leading-6 font-medium'>
+                  Blood Type:
+                  <span className='ml-2 text-headingColor text-[22px] leading-8'>{user?.user?.bloodType || 'o-'}</span>
                 </p>
               </div>
 
