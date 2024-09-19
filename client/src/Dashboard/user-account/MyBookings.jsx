@@ -6,7 +6,7 @@ import DoctorCard from '../../components/Doctors/DoctorCard'
 
 const MyBookings = () => {
   const { data, loading, error } = useFetchData(`${BASE_URL}/users/appointments/my-appointments`)
-  const appointments = data?.appointments
+  const appointments = data?.appointments || []
   console.log('Fetched Appointments:', appointments)
   return (
     <div>
