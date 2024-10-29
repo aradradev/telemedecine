@@ -26,7 +26,7 @@ const MyAccount = () => {
               </div>
 
               <div className='text-center mt-4'>
-                <h2 className='text-2xl font-bold text-headingColor'>{user?.name}</h2>
+                <h2 className='text-2xl font-bold text-headingColor'>{user?.user?.name}</h2>
                 <p className='text-textColor text-[15px] leading-6 font-medium'>
                   {user?.user?.email || 'example@mail.com'}
                 </p>

@@ -6,6 +6,7 @@ import DoctorCard from '../../components/Doctors/DoctorCard'
 
 const MyBookings = () => {
   const { data, loading, error } = useFetchData(`${BASE_URL}/users/appointments/my-appointments`)
+  console.log('Fetched Data: ', data)
   const appointments = data?.appointments || []
   console.log('Fetched Appointments:', appointments)
   return (
@@ -21,7 +22,7 @@ const MyBookings = () => {
       )}
       {!loading && !error && appointments.length === 0 && (
         <h1 className='mt-5 text-center leading-7 text-[20px] font-semibold text-primaryColor'>
-          You did not book any doctor yet
+          You have no bookings yet.
         </h1>
       )}
     </div>
