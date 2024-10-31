@@ -1,5 +1,4 @@
-import signupImg from '../assets/images/signup.gif'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import uploadImageToCloudinary from '../../utils/uploadCloudinary'
 import { BASE_URL } from '../../config'
