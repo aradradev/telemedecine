@@ -1,13 +1,14 @@
+/* eslint-disable react/prop-types */
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import uploadImageToCloudinary from '../../utils/uploadCloudinary'
 import { BASE_URL } from '../../config'
 import { toast } from 'react-toastify'
 import HashLoader from 'react-spinners/HashLoader'
 
-const Profile = () => {
+const Profile = ({ userData }) => {
+  console.log('User profile props: ', userData)
   const [selectedFile, setSelectedFile] = useState(null)
-  const [previewURL, setPreviewURL] = useState('')
   const [loading, setLoading] = useState(false)
 
   const [formData, setFormData] = useState({
@@ -17,9 +18,19 @@ const Profile = () => {
     gender: '',
     bloodType: '',
     role: 'patient',
-    photo: selectedFile,
+    photo: null,
   })
   const navigate = useNavigate()
+
+  useEffect(() => {
+    setFormData({
+      name: userData.user.name,
+      email: userData.user.email,
+      photo: userData.user.photo,
+      gender: userData.user.gender,
+      bloodType: userData.user.bloodType,
+    })
+  }, [userData])
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -29,7 +40,6 @@ const Profile = () => {
     const file = e.target.files[0]
     const data = await uploadImageToCloudinary(file)
     // console.log(data)
-    setPreviewURL(data.url)
     setSelectedFile(data.url)
     setFormData({ ...formData, photo: data.url })
   }
@@ -99,7 +109,7 @@ const Profile = () => {
         <div className='mb-5'>
           <input
             type='text'
-            placeholder='BloodType'
+            placeholder='Blood Type'
             name='bloodType'
             value={formData.bloodType}
             onChange={handleInputChange}
@@ -124,9 +134,9 @@ const Profile = () => {
           </label>
         </div>
         <div className='mb-5 flex items-center gap-3'>
-          {selectedFile && (
+          {formData.photo && (
             <figure className='w-[60px] h-[60px] rounded-full border-2 border-solid border-primaryColor flex items-center justify-center'>
-              <img src={previewURL} alt='avatar' className='rounded-full w-full' />
+              <img src={formData.photo} alt='avatar' className='rounded-full w-full' />
             </figure>
           )}
           <div className='relative w-[130px] h-[50px]'>
