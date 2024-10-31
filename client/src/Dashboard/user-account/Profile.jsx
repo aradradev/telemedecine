@@ -54,7 +54,7 @@ const Profile = ({ userData }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        credentials: true,
+        credentials: 'include',
         body: JSON.stringify(formData),
       })
       const { message } = await res.json()

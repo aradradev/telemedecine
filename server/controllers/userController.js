@@ -34,9 +34,9 @@ const showCurrentUser = async (req, res) => {
 }
 
 const updateUser = async (req, res) => {
-  const { name, email, bloodType } = req.body
+  const { name, email, bloodType, photo } = req.body
   console.log(req.body)
-  if (!name || !email) {
+  if (!name || !email || !bloodType || photo) {
     console.log('Payload error')
     throw new CustomError.BadRequestError('Please provide both name and email')
   }
@@ -50,6 +50,8 @@ const updateUser = async (req, res) => {
 
   user.name = name
   user.email = email
+  user.bloodType = bloodType
+  user.photo = photo
 
   await user.save()
   console.log('user updated', user)
