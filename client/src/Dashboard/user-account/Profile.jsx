@@ -49,11 +49,12 @@ const Profile = ({ userData }) => {
     setLoading(true)
 
     try {
-      const res = await fetch(`${BASE_URL}/auth/register`, {
-        method: 'post',
+      const res = await fetch(`${BASE_URL}/users/updateUser`, {
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: true,
         body: JSON.stringify(formData),
       })
       const { message } = await res.json()
@@ -63,7 +64,7 @@ const Profile = ({ userData }) => {
 
       setLoading(false)
       toast.success(message)
-      navigate('/login')
+      navigate('/users/profile/me')
     } catch (err) {
       toast.error(err.message)
       setLoading(false)
@@ -71,7 +72,7 @@ const Profile = ({ userData }) => {
   }
 
   return (
-    <div>
+    <div className='mt-10'>
       <form onSubmit={submitHandler}>
         <div className='mb-5'>
           <input
@@ -90,17 +91,6 @@ const Profile = ({ userData }) => {
             placeholder='Enter your email'
             name='email'
             value={formData.email}
-            onChange={handleInputChange}
-            className='py-3 pr-4 w-full border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor cursor-pointer'
-            required
-          />
-        </div>
-        <div className='mb-5'>
-          <input
-            type='password'
-            placeholder='Password'
-            name='password'
-            value={formData.password}
             onChange={handleInputChange}
             className='py-3 pr-4 w-full border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor cursor-pointer'
             required
