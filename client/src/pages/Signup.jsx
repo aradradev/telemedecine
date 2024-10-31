@@ -87,6 +87,8 @@ const Signup = () => {
                   className='py-3 pr-4 w-full border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor cursor-pointer'
                   required
                 />
+              </div>
+              <div className='mb-5'>
                 <input
                   type='email'
                   placeholder='Enter your email'
@@ -96,6 +98,8 @@ const Signup = () => {
                   className='py-3 pr-4 w-full border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor cursor-pointer'
                   required
                 />
+              </div>
+              <div className='mb-5'>
                 <input
                   type='password'
                   placeholder='Password'

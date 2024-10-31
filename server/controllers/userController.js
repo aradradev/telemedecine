@@ -85,7 +85,10 @@ const updateUserPassword = async (req, res) => {
 
 const getMyAppointments = async (req, res) => {
   // console.log('fetching appointments for users: ', req.user.userId)
-  const bookings = await Booking.find({ user: req.user.userId }).populate('doctor', 'name email specialization')
+  const bookings = await Booking.find({ user: req.user.userId }).populate(
+    'doctor',
+    'name email specialization hospital avgRating photo totalRating totalPatients',
+  )
 
   // console.log('Found bookings: ', bookings)
 
