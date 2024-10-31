@@ -15,6 +15,7 @@ const Profile = () => {
     email: '',
     password: '',
     gender: '',
+    bloodType: '',
     role: 'patient',
     photo: selectedFile,
   })
