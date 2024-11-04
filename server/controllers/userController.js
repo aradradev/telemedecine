@@ -36,7 +36,7 @@ const showCurrentUser = async (req, res) => {
 const updateUser = async (req, res) => {
   const { name, email, bloodType, photo } = req.body
   console.log(req.body)
-  if (!name || !email || !bloodType || photo) {
+  if (!name || !email || !bloodType || !photo) {
     console.log('Payload error')
     throw new CustomError.BadRequestError('Please provide both name and email')
   }
