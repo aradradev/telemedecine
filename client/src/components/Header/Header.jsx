@@ -74,11 +74,13 @@ const Header = () => {
                   </figure>
                 </Link>
                 {/* Logout Button */}
-                <button
-                  onClick={logout}
-                  className='bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px]'>
-                  Logout
-                </button>
+                <div className='md:block hidden'>
+                  <button
+                    onClick={logout}
+                    className=' bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px]'>
+                    Logout
+                  </button>
+                </div>
               </>
             ) : (
               <Link to='/login'>

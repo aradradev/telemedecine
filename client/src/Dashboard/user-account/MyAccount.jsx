@@ -6,9 +6,11 @@ import { BASE_URL } from '../../config'
 import useFetchData from '../../hooks/useFetchData'
 import Loading from '../../components/Loader/Loading'
 import Error from '../../components/Error/Error'
+import { useAuth } from '../../context/AuthContext'
 
 const MyAccount = () => {
   const [tab, setTab] = useState('bookings')
+  const { logout } = useAuth()
   const { data: user, loading, error } = useFetchData(`${BASE_URL}/users/profile/me`)
   // console.log(`userFetchData: ${JSON.stringify(user)}`)
   return (
@@ -38,9 +40,11 @@ const MyAccount = () => {
 
               <div className='mt-[50px] md:mt-[100px]'>
                 <p className='text-center text-textColor text-[15px] leading-6 font-medium mb-3'>
-                  Don&apos;t like our services?
+                  Don&apos;t Like Our Services?
                 </p>
-                <button className='w-full bg-[#181a1e] hover:bg-black leading-7 mb-4 text-white font-bold p-3 rounded-md'>
+                <button
+                  onClick={logout}
+                  className='w-full bg-[#181a1e] hover:bg-black leading-7 mb-4 text-white font-bold p-3 rounded-md'>
                   Logout
                 </button>
                 <button className='w-full bg-red-500 hover:bg-red-700 leading-7 text-white font-bold p-3 rounded-md'>

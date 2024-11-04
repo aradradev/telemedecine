@@ -1,6 +1,8 @@
 import { BiMenu } from 'react-icons/bi'
+import { useAuth } from '../../context/AuthContext'
 
 const Tabs = ({ tab, setTab }) => {
+  const { logout } = useAuth()
   return (
     <div>
       <span className='lg:hidden'>
@@ -30,9 +32,11 @@ const Tabs = ({ tab, setTab }) => {
         </button>
         <div className='mt-[50px] md:mt-[100px]'>
           <p className='text-center text-textColor text-[15px] leading-6 font-medium mb-3'>
-            Don&apos;t like our services?
+            Don&apos;t Like Our Services?
           </p>
-          <button className='w-full bg-[#181a1e] hover:bg-black leading-7 mb-4 text-white font-bold p-3 rounded-md'>
+          <button
+            onClick={logout}
+            className='w-full bg-[#181a1e] hover:bg-black leading-7 mb-4 text-white font-bold p-3 rounded-md'>
             Logout
           </button>
           <button className='w-full bg-red-500 hover:bg-red-700 leading-7 text-white font-bold p-3 rounded-md'>
