@@ -6,6 +6,7 @@ import Tabs from './Tabs'
 import { useState } from 'react'
 import StarIcon from '../../assets/images/Star.png'
 import DoctorAbout from '../../pages/Doctors/DoctorAbout'
+import Profile from './Profile'
 
 const Dashboard = () => {
   const [tab, setTab] = useState('overview')
@@ -78,7 +79,11 @@ const Dashboard = () => {
                   </div>
                 )}
                 {tab === 'appointments' && <div>Appointments</div>}
-                {tab === 'settings' && <div>Profile Settings</div>}
+                {tab === 'settings' && (
+                  <div>
+                    <Profile />
+                  </div>
+                )}
               </div>
             </div>
           </div>
