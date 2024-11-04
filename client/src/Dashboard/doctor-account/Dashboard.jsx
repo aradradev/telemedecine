@@ -3,8 +3,10 @@ import Error from '../../components/Error/Error'
 import useGetProfile from '../../hooks/useFetchData'
 import { BASE_URL } from '../../config'
 import Tabs from './Tabs'
+import { useState } from 'react'
 
 const Dashboard = () => {
+  const [tab, setTab] = useState()
   const { data, loading, error } = useGetProfile(`${BASE_URL}/doctors/profile/me`)
   console.log('profile data: ', data)
 
