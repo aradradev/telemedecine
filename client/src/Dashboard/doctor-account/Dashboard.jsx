@@ -6,6 +6,7 @@ import Tabs from './Tabs'
 
 const Dashboard = () => {
   const { data, loading, error } = useGetProfile(`${BASE_URL}/doctors/profile/me`)
+  console.log('profile data: ', data)
 
   return (
     <section>
