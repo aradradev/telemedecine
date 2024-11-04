@@ -6,7 +6,7 @@ import Tabs from './Tabs'
 import { useState } from 'react'
 
 const Dashboard = () => {
-  const [tab, setTab] = useState()
+  const [tab, setTab] = useState('overview')
   const { data, loading, error } = useGetProfile(`${BASE_URL}/doctors/profile/me`)
   console.log('profile data: ', data)
 
@@ -17,7 +17,7 @@ const Dashboard = () => {
         {error && !loading && <Error />}
         {!loading && !error && (
           <div className='grid lg:grid-cols-3 gap-[30px] lg:gap-[50px]'>
-            <Tabs />
+            <Tabs tab={tab} setTab={setTab} />
           </div>
         )}
       </div>
