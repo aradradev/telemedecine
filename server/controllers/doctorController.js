@@ -120,7 +120,7 @@ const getDoctorProfile = async (req, res) => {
     .populate('user', 'name email photo bloodType')
     .sort('appointmentDate')
     .catch((error) => {
-      throw new CustomError.BadRequestError(`Error fetching appointments: ${error}`)
+      throw new CustomError.BadRequestError(`Error fetching appointments - ${error}`)
     })
 
   res.status(StatusCodes.OK).json({ doctor, appointments })
