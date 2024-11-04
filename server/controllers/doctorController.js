@@ -117,7 +117,7 @@ const getDoctorProfile = async (req, res) => {
 
   // get appointment from the Booking
   const appointments = await Booking.find({ doctor: doctorId })
-    .populate('patient', 'name email')
+    .populate('patient', 'name email photo bloodType')
     .sort('appointmentDate')
     .catch((error) => {
       throw new CustomError.BadRequestError('Error fetching appointments')
