@@ -40,6 +40,9 @@ const MyAccount = () => {
                 <p className='text-center text-textColor text-[15px] leading-6 font-medium mb-3'>
                   Don&apos;t like our services?
                 </p>
+                <button className='w-full bg-[#181a1e] hover:bg-black leading-7 mb-4 text-white font-bold p-3 rounded-md'>
+                  Logout
+                </button>
                 <button className='w-full bg-red-500 hover:bg-red-700 leading-7 text-white font-bold p-3 rounded-md'>
                   Delete account
                 </button>
