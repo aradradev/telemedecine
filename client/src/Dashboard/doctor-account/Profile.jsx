@@ -8,9 +8,14 @@ const Profile = () => {
     bio: '',
     gender: '',
     specialization: '',
-    ticketPrice: '',
+    ticketPrice: 0,
+    qualifications: [],
+    experiences: [],
+    timeSlots: [],
   })
-  const handleInputChange = () => {}
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
   return (
     <div>
       <h2 className='text-headingColor font-bold text-[24px] leading-9 mb-10'>Profile Information</h2>
@@ -90,7 +95,7 @@ const Profile = () => {
             <p className='form__label'>Ticket Price*</p>
             <input
               type='number'
-              placeholder='100'
+              placeholder='100k'
               name='ticketPrice'
               value={formData.ticketPrice}
               className='form__input'
