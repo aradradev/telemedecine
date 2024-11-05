@@ -6,6 +6,9 @@ const Profile = () => {
     email: '',
     phone: '',
     bio: '',
+    gender: '',
+    specialization: '',
+    ticketPrice: '',
   })
   const handleInputChange = () => {}
   return (
@@ -13,7 +16,7 @@ const Profile = () => {
       <h2 className='text-headingColor font-bold text-[24px] leading-9 mb-10'>Profile Information</h2>
       <form></form>
       <div className='mb-5'>
-        <p className='form__label'>Name *</p>
+        <p className='form__label'>Name*</p>
         <input
           type='text'
           name='name'
@@ -24,7 +27,7 @@ const Profile = () => {
         />
       </div>
       <div className='mb-5'>
-        <p className='form__label'>Email *</p>
+        <p className='form__label'>Email*</p>
         <input
           type='email'
           name='email'
@@ -38,7 +41,7 @@ const Profile = () => {
         />
       </div>
       <div className='mb-5'>
-        <p className='form__label'>Phone *</p>
+        <p className='form__label'>Phone*</p>
         <input
           type='number'
           name='phone'
@@ -49,7 +52,7 @@ const Profile = () => {
         />
       </div>
       <div className='mb-5'>
-        <p className='form__label'>Bio *</p>
+        <p className='form__label'>Bio*</p>
         <input
           type='text'
           name='bio'
@@ -58,6 +61,42 @@ const Profile = () => {
           className='form__input'
           onChange={handleInputChange}
         />
+      </div>
+      <div className='mb-5'>
+        <div className='grid grid-cols-3 gap-5 mb-[30px]'>
+          <div>
+            <p className='form__label'>Gender*</p>
+            <select name='gender' value={formData.gender} className='form__input py-3.5' onChange={handleInputChange}>
+              <option value=''>Select</option>
+              <option value='male'>Male</option>
+              <option value='female'>Female</option>
+              <option value='other'>Other</option>
+            </select>
+          </div>
+          <div>
+            <p className='form__label'>Specialization*</p>
+            <select
+              name='specialization'
+              value={formData.specialization}
+              className='form__input py-3.5'
+              onChange={handleInputChange}>
+              <option value=''>Select</option>
+              <option value='surgeon'>Surgeon</option>
+              <option value='neurologist'>Neurologist</option>
+              <option value='dermatologist'>Dermatologist</option>
+            </select>
+          </div>
+          <div>
+            <p className='form__label'>Ticket Price*</p>
+            <input
+              type='number'
+              placeholder='100'
+              name='ticketPrice'
+              value={formData.ticketPrice}
+              className='form__input'
+            />
+          </div>
+        </div>
       </div>
     </div>
   )
