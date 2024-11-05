@@ -110,7 +110,7 @@ const Signup = () => {
                   required
                 />
               </div>
-              <div className='mb-5 flex ic justify-between'>
+              <div className='mb-5 flex items-center justify-between'>
                 <label htmlFor='' className='text-headingColor text-[16px] leading-7 font-bold'>
                   Are you a:
                   <select

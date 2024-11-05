@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { formateDate } from '../../utils/formateDate'
 
-const DoctorAbout = ({ name, bio, qualifications, experiences }) => {
+const DoctorAbout = ({ name, about, qualifications, experiences }) => {
   return (
     <div>
       <div>

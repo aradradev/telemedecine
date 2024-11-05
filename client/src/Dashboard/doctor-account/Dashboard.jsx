@@ -72,7 +72,7 @@ const Dashboard = () => {
                     </div>
                     <DoctorAbout
                       name={data?.doctor?.name}
-                      bio={data?.doctor?.bio}
+                      about={data?.doctor?.about}
                       qualifications={data?.doctor?.qualifications}
                       experiences={data?.doctor?.experiences}
                     />
