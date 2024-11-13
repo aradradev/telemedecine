@@ -81,7 +81,7 @@ const Dashboard = () => {
                 {tab === 'appointments' && <div>Appointments</div>}
                 {tab === 'settings' && (
                   <div>
-                    <Profile />
+                    <Profile doctorData={data} />
                   </div>
                 )}
               </div>

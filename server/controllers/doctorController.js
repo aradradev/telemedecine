@@ -56,19 +56,8 @@ const getSingleDoctor = async (req, res) => {
 
 const updateDoctor = async (req, res) => {
   const { id: doctorId } = req.params
-  const {
-    name,
-    email,
-    phone,
-    photo,
-    specialization,
-    hospital,
-    qualifications,
-    experiences,
-    bio,
-    ticketPrice,
-    timeSlots,
-  } = req.body
+  const { name, email, phone, photo, specialization, about, qualifications, experiences, bio, ticketPrice, timeSlots } =
+    req.body
 
   const doctor = await Doctor.findById(doctorId).select('-password')
   if (!doctor) {
@@ -80,7 +69,7 @@ const updateDoctor = async (req, res) => {
   if (phone) doctor.phone = phone
   if (photo) doctor.photo = photo
   if (specialization) doctor.specialization = specialization
-  if (hospital) doctor.hospital = hospital
+  if (about) doctor.about = about
   if (qualifications) doctor.qualifications = qualifications
   if (experiences) doctor.experiences = experiences
   if (bio) doctor.bio = bio

@@ -13,10 +13,7 @@ const reviewRouter = require('./reviewRoutes')
 
 const router = express.Router()
 
-router
-  .route('/profile/me')
-  .get(authenticateUser, authorizedPermissions('doctor'), getDoctorProfile)
-  .patch(authenticateUser, authorizedPermissions('doctor'), updateDoctor)
+router.route('/profile/me').get(authenticateUser, authorizedPermissions('doctor'), getDoctorProfile)
 
 // nested router for review
 router.use('/:doctorId/reviews', reviewRouter)

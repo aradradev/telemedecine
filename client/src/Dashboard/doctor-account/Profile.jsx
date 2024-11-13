@@ -1,10 +1,11 @@
-import { useState } from 'react'
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from 'react'
 import { AiOutlineDelete } from 'react-icons/ai'
 import uploadImageToCloudinary from '../../utils/uploadCloudinary'
 import { toast } from 'react-toastify'
 import { BASE_URL } from '../../config'
 
-const Profile = () => {
+const Profile = ({ doctorData }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -19,6 +20,25 @@ const Profile = () => {
     about: '',
     photo: null,
   })
+
+  useEffect(() => {
+    if (doctorData?.doctor) {
+      setFormData({
+        ...formData,
+        name: doctorData.doctor.name || '',
+        email: doctorData.doctor.email || '',
+        phone: doctorData.doctor.phone || '',
+        bio: doctorData.doctor.bio || '',
+        specialization: doctorData.doctor.specialization || '',
+        ticketPrice: doctorData.doctor.ticketPrice || 0,
+        qualifications: doctorData.doctor.qualifications || [],
+        experiences: doctorData.doctor.experiences || [],
+        about: doctorData.doctor.about || '',
+        photo: doctorData.doctor.photo || null,
+      })
+    }
+  }, [doctorData])
+
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
@@ -34,7 +54,7 @@ const Profile = () => {
     e.preventDefault()
 
     try {
-      const res = await fetch(`${BASE_URL}/doctors/profile/me`, {
+      const res = await fetch(`${BASE_URL}/doctors/${doctorData.doctor._id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -44,7 +64,7 @@ const Profile = () => {
       })
 
       const result = await res.json()
-      console.log(result)
+      console.log('Profile result: ', result)
       if (!res.ok) {
         throw new Error(result.message)
       }
