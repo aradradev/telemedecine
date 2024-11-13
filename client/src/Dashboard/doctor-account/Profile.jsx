@@ -37,7 +37,7 @@ const Profile = () => {
       const res = await fetch(`${BASE_URL}/doctors/profile/me`, {
         method: 'PATCH',
         headers: {
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
         credentials: 'include',
