@@ -138,7 +138,7 @@ const Profile = ({ doctorData }) => {
   const addTimeSlot = (e) => {
     e.preventDefault()
 
-    addItem('timeSlots', { day: 'Monday', startingTime: '12:00', endingTime: '04:30' })
+    addItem('timeSlots', { day: 'Monday', startingTime: '12:00', endingTime: '4:30' })
   }
 
   const handleTimeSlotChange = (event, index) => {

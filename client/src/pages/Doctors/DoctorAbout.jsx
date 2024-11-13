@@ -8,10 +8,7 @@ const DoctorAbout = ({ name, about, qualifications, experiences }) => {
         <h3 className='text-[20px] leading-[30px] text-headingColor font-semibold flex items-center gap-2'>
           About <span className='text-irisBlueColor font-bold text-[24px] leading-9'>{name}</span>
         </h3>
-        <p className='text__para'>
-          Dr. John Doe is a highly skilled surgeon with over 10 years of experience in providing exceptional care. He is
-          known for his precision and compassionate approach, ensuring the best outcomes for his patients.
-        </p>
+        <p className='text__para'>{about}</p>
       </div>
 
       <div className='mt-12'>
@@ -20,11 +17,11 @@ const DoctorAbout = ({ name, about, qualifications, experiences }) => {
           <li className='flex flex-col sm:flex-row sm:justify-between sm:items-end md:gap-5 mb-[30px]'>
             <div>
               <span className='text-irisBlueColor text-[15px] leading-6 font-semibold '>
-                {formateDate('08-24-2015')} - {formateDate('10-01-2020')}
+                {formateDate(`${qualifications[0]?.startingDate}`)} - {formateDate(`${qualifications[0]?.endingDate}`)}
               </span>
-              <p className='text-[15px] leading-6 font-medium text-textColor'>PHD in Surgeon</p>
+              <p className='text-[15px] leading-6 font-medium text-textColor'>{qualifications[0]?.degree}</p>
             </div>
-            <p className='text-[14px] leading-5 font-medium text-textColor'>New Appollo, New York.</p>
+            <p className='text-[14px] leading-5 font-medium text-textColor'>{qualifications[0]?.university}</p>
           </li>
           <li className='flex flex-col sm:flex-row sm:justify-between sm:items-end md:gap-5 mb-[30px]'>
             <div>
@@ -39,7 +36,7 @@ const DoctorAbout = ({ name, about, qualifications, experiences }) => {
       </div>
 
       <div className='mt-12'>
-        <h3 className='text-[20px] leading-[30px] text-headingColor font-semibold'>Experience</h3>
+        <h3 className='text-[20px] leading-[30px] text-headingColor font-semibold'>Experiences</h3>
         <ul className='grid sm:grid-cols-2 gap-[30px] pt-4 md:p-5'>
           <li className='p-4 rounded bg-[#fff9ea]'>
             <span className='text-yellowColor text-[15px] leading-6 font-semibold'>
