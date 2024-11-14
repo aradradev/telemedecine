@@ -7,6 +7,7 @@ import { useState } from 'react'
 import StarIcon from '../../assets/images/Star.png'
 import DoctorAbout from '../../pages/Doctors/DoctorAbout'
 import Profile from './Profile'
+import Appointments from './Appointments'
 
 const Dashboard = () => {
   const [tab, setTab] = useState('overview')
@@ -61,10 +62,10 @@ const Dashboard = () => {
                         <div className='flex items-center gap-[6px]'>
                           <span className='flex items-center gap-[6px] text-headingColor text-[14px] leading-5 lg:text-[16px] lg:leading-6 font-semibold'>
                             <img src={StarIcon} alt='star image' />
-                            4.5
+                            {data?.doctor?.averageRating}
                           </span>
                           <span className=' text-textColor text-[14px] leading-5 lg:text-[16px] lg:leading-6 font-semibold'>
-                            (233)
+                            ({data?.doctor?.totalRating})
                           </span>
                         </div>
                         <p className='text__para font-[15px] lg:max-w-[390px] leading-6'>{data?.doctor?.bio}</p>
@@ -78,7 +79,11 @@ const Dashboard = () => {
                     />
                   </div>
                 )}
-                {tab === 'appointments' && <div>Appointments</div>}
+                {tab === 'appointments' && (
+                  <div>
+                    <Appointments appointments={data?.doctor?.appointments} />
+                  </div>
+                )}
                 {tab === 'settings' && (
                   <div>
                     <Profile doctorData={data} />
