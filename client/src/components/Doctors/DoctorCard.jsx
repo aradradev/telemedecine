@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import starIcon from '../../assets/images/Star.png'
 import { BsArrowRight } from 'react-icons/bs'
 const DoctorCard = ({ doctor }) => {
-  // console.log(doctor)
-  const { name, specialization, avgRating = 0, totalRating = 0, photo, totalPatients = 0, hospital } = doctor
+  console.log('DoctorCard: ', doctor)
+  const { name, specialization, averageRating, totalRating, photo, totalPatients = 233, experiences } = doctor
   return (
     <div className='p-3 lg:p-5'>
       <div>
@@ -20,10 +20,10 @@ const DoctorCard = ({ doctor }) => {
         <div className='flex items-center gap-[6px]'>
           <span className='flex items-center gap-[6px] text-[14px] leading-6 lg:text-[16px] lg:leading-7 font-semibold text-headingColor'>
             <img src={starIcon} alt='Star icon' />
-            {avgRating}
+            {averageRating}
           </span>
           <span className='text-[14px] leading-6 lg:text-[16px] lg:leading-7 font-[400] text-textColor'>
-            ( {totalRating})
+            ({totalRating})
           </span>
         </div>
       </div>
@@ -32,7 +32,11 @@ const DoctorCard = ({ doctor }) => {
           <h3 className='text-[16px] leading-7 lg:text-[18px] lg:leading-[30px] font-semibold text-headingColor'>
             +{totalPatients} patients
           </h3>
-          <p className='text-[14px] leading-7 font-[400] text-textColor'>At {hospital}</p>
+          {experiences?.map((experience, index) => (
+            <p key={index} className='text-[14px] leading-7 font-[400] text-textColor'>
+              At {experience?.hospital}
+            </p>
+          ))}
         </div>
         <Link
           to='/doctors/1'
