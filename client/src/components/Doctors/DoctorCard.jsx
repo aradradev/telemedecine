@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import starIcon from '../../assets/images/Star.png'
 import { BsArrowRight } from 'react-icons/bs'
 const DoctorCard = ({ doctor }) => {
-  console.log('DoctorCard: ', doctor)
+  // console.log('DoctorCard: ', doctor)
   const { name, specialization, averageRating, totalRating, photo, totalPatients = 233, experiences } = doctor
   return (
     <div className='p-3 lg:p-5'>
@@ -32,11 +32,9 @@ const DoctorCard = ({ doctor }) => {
           <h3 className='text-[16px] leading-7 lg:text-[18px] lg:leading-[30px] font-semibold text-headingColor'>
             +{totalPatients} patients
           </h3>
-          {experiences?.map((experience, index) => (
-            <p key={index} className='text-[14px] leading-7 font-[400] text-textColor'>
-              At {experience?.hospital}
-            </p>
-          ))}
+          {experiences && (
+            <p className='text-[14px] leading-7 font-[400] text-textColor'>At {experiences[0]?.hospital}</p>
+          )}
         </div>
         <Link
           to='/doctors/1'
