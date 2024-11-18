@@ -3,6 +3,7 @@ const { StatusCodes } = require('http-status-codes')
 const CustomError = require('../errors')
 const { checkPermissions, attachCookiesToResponse, createTokenUser } = require('../utils')
 const Doctor = require('../models/Doctor')
+const Booking = require('../models/Booking')
 
 const getAllUsers = async (req, res) => {
   const patients = await User.find({ role: 'patient' }).select('-password')
@@ -24,14 +25,18 @@ const getSingleUser = async (req, res) => {
 }
 
 const showCurrentUser = async (req, res) => {
-  const currentUser = req.user
+  const currentUser = await User.findById(req.user.userId).select('-password')
+  if (!currentUser) {
+    throw new CustomError.NotFoundError('User not found')
+  }
+  // console.log(currentUser)
   res.status(StatusCodes.OK).json({ user: currentUser })
 }
 
 const updateUser = async (req, res) => {
-  const { name, email } = req.body
+  const { name, email, bloodType, photo } = req.body
   console.log(req.body)
-  if (!name || !email) {
+  if (!name || !email || !bloodType || !photo) {
     console.log('Payload error')
     throw new CustomError.BadRequestError('Please provide both name and email')
   }
@@ -45,6 +50,8 @@ const updateUser = async (req, res) => {
 
   user.name = name
   user.email = email
+  user.bloodType = bloodType
+  user.photo = photo
 
   await user.save()
   console.log('user updated', user)
@@ -78,10 +85,35 @@ const updateUserPassword = async (req, res) => {
   res.status(StatusCodes.OK).json({ success: true, message: 'Password updated successfully' })
 }
 
+const getMyAppointments = async (req, res) => {
+  // console.log('fetching appointments for users: ', req.user.userId)
+  const bookings = await Booking.find({ user: req.user.userId }).populate(
+    'doctor',
+    'name email specialization hospital avgRating photo totalRating totalPatients',
+  )
+
+  // console.log('Found bookings: ', bookings)
+
+  if (!bookings.length) {
+    throw new CustomError.NotFoundError('No appointments found for this user')
+  }
+
+  res.status(StatusCodes.OK).json({
+    status: true,
+    appointments: bookings.map((booking) => ({
+      bookingId: booking._id,
+      date: booking.date,
+      status: booking.status,
+      doctor: booking.doctor,
+    })),
+  })
+}
+
 module.exports = {
   getAllUsers,
   getSingleUser,
   showCurrentUser,
   updateUser,
   updateUserPassword,
+  getMyAppointments,
 }

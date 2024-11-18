@@ -2,6 +2,7 @@ const Doctor = require('../models/Doctor')
 const { StatusCodes } = require('http-status-codes')
 const CustomError = require('../errors')
 const { checkPermissions } = require('../utils')
+const Booking = require('../models/Booking')
 
 const getAllDoctors = async (req, res) => {
   const { specialization, name, minRating, maxRating, sort, fields } = req.query
@@ -55,7 +56,7 @@ const getSingleDoctor = async (req, res) => {
 
 const updateDoctor = async (req, res) => {
   const { id: doctorId } = req.params
-  const { name, email, phone, photo, specialization, qualifications, experiences, bio, ticketPrice, timeSlots } =
+  const { name, email, phone, photo, specialization, about, qualifications, experiences, bio, ticketPrice, timeSlots } =
     req.body
 
   const doctor = await Doctor.findById(doctorId).select('-password')
@@ -68,6 +69,7 @@ const updateDoctor = async (req, res) => {
   if (phone) doctor.phone = phone
   if (photo) doctor.photo = photo
   if (specialization) doctor.specialization = specialization
+  if (about) doctor.about = about
   if (qualifications) doctor.qualifications = qualifications
   if (experiences) doctor.experiences = experiences
   if (bio) doctor.bio = bio
@@ -95,9 +97,28 @@ const deleteDoctor = async (req, res) => {
   res.status(StatusCodes.OK).json({ message: 'Doctor deleted successfully' })
 }
 
+const getDoctorProfile = async (req, res) => {
+  const doctorId = req.user.userId
+  const doctor = await Doctor.findById(doctorId).select('-password')
+  if (!doctor) {
+    throw new CustomError.NotFoundError(`No doctor with id: ${doctorId}`)
+  }
+
+  // get appointment from the Booking
+  const appointments = await Booking.find({ doctor: doctorId })
+    .populate('user', 'name email photo bloodType gender')
+    .sort('appointmentDate')
+    .catch((error) => {
+      throw new CustomError.BadRequestError(`Error fetching appointments - ${error}`)
+    })
+
+  res.status(StatusCodes.OK).json({ doctor, appointments })
+}
+
 module.exports = {
   getAllDoctors,
   getSingleDoctor,
   updateDoctor,
   deleteDoctor,
+  getDoctorProfile,
 }

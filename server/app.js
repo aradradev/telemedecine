@@ -25,6 +25,7 @@ const bookingRouter = require('./routes/bookingRoutes')
 // set up security
 const corsOptions = {
   origin: true,
+  credentials: true,
 }
 app.use(cors(corsOptions))
 

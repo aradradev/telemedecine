@@ -1,11 +1,15 @@
 import signupImg from '../assets/images/signup.gif'
-import avatar from '../assets/images/doctor-img02.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import uploadImageToCloudinary from '../utils/uploadCloudinary'
+import { BASE_URL } from '../config'
+import { toast } from 'react-toastify'
+import HashLoader from 'react-spinners/HashLoader'
 
 const Signup = () => {
   const [selectedFile, setSelectedFile] = useState(null)
   const [previewURL, setPreviewURL] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const [formData, setFormData] = useState({
     name: '',
@@ -15,6 +19,7 @@ const Signup = () => {
     role: 'patient',
     photo: selectedFile,
   })
+  const navigate = useNavigate()
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -22,11 +27,37 @@ const Signup = () => {
 
   const handleFileInputChange = async (e) => {
     const file = e.target.files[0]
-    console.log(file)
+    const data = await uploadImageToCloudinary(file)
+    // console.log(data)
+    setPreviewURL(data.url)
+    setSelectedFile(data.url)
+    setFormData({ ...formData, photo: data.url })
   }
 
   const submitHandler = async (e) => {
     e.preventDefault()
+    setLoading(true)
+
+    try {
+      const res = await fetch(`${BASE_URL}/auth/register`, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+      const { message } = await res.json()
+      if (!res.ok) {
+        throw new Error(message)
+      }
+
+      setLoading(false)
+      toast.success(message)
+      navigate('/login')
+    } catch (err) {
+      toast.error(err.message)
+      setLoading(false)
+    }
   }
 
   return (
@@ -56,6 +87,8 @@ const Signup = () => {
                   className='py-3 pr-4 w-full border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor cursor-pointer'
                   required
                 />
+              </div>
+              <div className='mb-5'>
                 <input
                   type='email'
                   placeholder='Enter your email'
@@ -65,6 +98,8 @@ const Signup = () => {
                   className='py-3 pr-4 w-full border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor cursor-pointer'
                   required
                 />
+              </div>
+              <div className='mb-5'>
                 <input
                   type='password'
                   placeholder='Password'
@@ -75,7 +110,7 @@ const Signup = () => {
                   required
                 />
               </div>
-              <div className='mb-5 flex ic justify-between'>
+              <div className='mb-5 flex items-center justify-between'>
                 <label htmlFor='' className='text-headingColor text-[16px] leading-7 font-bold'>
                   Are you a:
                   <select
@@ -102,9 +137,11 @@ const Signup = () => {
                 </label>
               </div>
               <div className='mb-5 flex items-center gap-3'>
-                <figure className='w-[60px] h-[60px] rounded-full border-2 border-solid border-primaryColor flex items-center justify-center'>
-                  <img src={avatar} alt='avatar' className='rounded-full w-full' />
-                </figure>
+                {selectedFile && (
+                  <figure className='w-[60px] h-[60px] rounded-full border-2 border-solid border-primaryColor flex items-center justify-center'>
+                    <img src={previewURL} alt='avatar' className='rounded-full w-full' />
+                  </figure>
+                )}
                 <div className='relative w-[130px] h-[50px]'>
                   <input
                     type='file'
@@ -123,9 +160,10 @@ const Signup = () => {
               </div>
               <div className='mt-5'>
                 <button
+                  disabled={loading && true}
                   className='bg-primaryColor text-white w-full py-3 px-4 text-[18px] rounded-lg leading-[30px]'
                   type='submit'>
-                  Sign Up
+                  {loading ? <HashLoader size={35} color='#ffffff' /> : 'Sign Up'}
                 </button>
               </div>
               <p className='mt-5 text-textColor text-center'>

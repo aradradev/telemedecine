@@ -1,35 +1,22 @@
 import '../../App.css'
 import { useEffect, useRef } from 'react'
+import { NavLink, Link, useNavigate } from 'react-router-dom'
+import { BiMenu } from 'react-icons/bi'
 import logo from '../../assets/images/vector/logoBlack.svg'
 import userImg from '../../assets/images/avatar-icon.png'
-import { NavLink, Link } from 'react-router-dom'
-import { BiMenu } from 'react-icons/bi'
+import { useAuth } from '../../context/AuthContext' // Import the context\
 
 const navLinks = [
-  {
-    path: '/home',
-    display: 'Home',
-  },
-  {
-    path: '/doctors',
-    display: 'Find  a Doctor',
-  },
-  {
-    path: '/services',
-    display: 'Services',
-  },
-  {
-    path: '/contact',
-    display: 'Contact',
-  },
+  { path: '/home', display: 'Home' },
+  { path: '/doctors', display: 'Find a Doctor' },
+  { path: '/services', display: 'Services' },
+  { path: '/contact', display: 'Contact' },
 ]
 
-{
-  /** Header Start here */
-}
 const Header = () => {
   const headerRef = useRef(null)
   const menuRef = useRef(null)
+  const { user, logout } = useAuth() // Access user and logout from context
 
   const handleStickyHeader = () => {
     window.addEventListener('scroll', () => {
@@ -44,19 +31,20 @@ const Header = () => {
   useEffect(() => {
     handleStickyHeader()
     return () => window.removeEventListener('scroll', handleStickyHeader)
-  })
+  }, [])
 
   const toggleMenu = () => menuRef.current.classList.toggle('show__menu')
+
   return (
     <header className='header flex items-center' ref={headerRef}>
       <div className='container'>
         <div className='flex items-center justify-between'>
-          {/* ===============logo Start here=============== */}
+          {/* Logo */}
           <div className='w-40'>
-            <img src={logo} alt='image logo' />
+            <img src={logo} alt='logo' />
           </div>
 
-          {/* ===============menu start here=============== */}
+          {/* Menu */}
           <div className='navigation' ref={menuRef} onClick={toggleMenu}>
             <ul className='menu flex items-center gap-[2.7rem]'>
               {navLinks.map((link, index) => (
@@ -74,20 +62,35 @@ const Header = () => {
               ))}
             </ul>
           </div>
-          {/* ===============Navigation to right start here================ */}
+
+          {/* Right Section - User */}
           <div className='flex items-center gap-4'>
-            <div>
-              <Link to='/' className='hidden'>
-                <figure className='w-[35px] h-[35px] rounded-full cursor-pointer'>
-                  <img src={userImg} className='w-full rounded-full' alt='user image' />
-                </figure>
+            {user ? (
+              <>
+                {/* Show user avatar if logged in */}
+                <Link to={`${user.role === 'doctor' ? '/doctors/profile/me' : '/users/profile/me'}`}>
+                  <figure className='w-[35px] h-[35px] rounded-full cursor-pointer'>
+                    <img src={user?.photo || userImg} className='w-full rounded-full' alt='User Avatar' />
+                  </figure>
+                </Link>
+                {/* Logout Button */}
+                <div className='md:block hidden'>
+                  <button
+                    onClick={logout}
+                    className=' bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px]'>
+                    Logout
+                  </button>
+                </div>
+              </>
+            ) : (
+              <Link to='/login'>
+                {/* Show login button if not logged in */}
+                <button className='bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px]'>
+                  Login
+                </button>
               </Link>
-            </div>
-            <Link to='/login'>
-              <button className='bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px]'>
-                Login
-              </button>
-            </Link>
+            )}
+            {/* Mobile menu toggle */}
             <span className='md:hidden' onClick={toggleMenu}>
               <BiMenu className='w-6 h-6 cursor-pointer' />
             </span>
@@ -97,4 +100,5 @@ const Header = () => {
     </header>
   )
 }
+
 export default Header
