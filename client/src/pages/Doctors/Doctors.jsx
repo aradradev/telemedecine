@@ -12,7 +12,7 @@ const Doctors = () => {
   const [query, setQuery] = useState('')
   const [debounceQuery, setDebounceQuery] = useState('')
 
-  // Function to handle search
+  // Function to handle Search
   const handleSearch = () => {
     setQuery(query.trim())
     console.log('handle search triggered:', query)
@@ -20,12 +20,19 @@ const Doctors = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (query) {
-        setDebounceQuery(query)
+        setDebounceQuery(query.trim())
       }
     }, 700)
 
     return () => clearTimeout(timeout)
   }, [query])
+
+  // Construct query params
+  // const queryParams = new URLSearchParams()
+  // if (debounceQuery) {
+  //   queryParams.set('name', debounceQuery)
+  //   queryParams.set('specialization', debounceQuery)
+  // }
 
   const { data, loading, error } = useFetchData(`${BASE_URL}/doctors?name=${debounceQuery}`)
 
@@ -40,7 +47,7 @@ const Doctors = () => {
             <input
               type='search'
               className='py-4 pl-4 pr-2 bg-transparent w-full focus:outline-none cursor-pointer placeholder:text-textColor'
-              placeholder='Search Doctor by name or specialization...'
+              placeholder='Search Doctor By Name...'
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
