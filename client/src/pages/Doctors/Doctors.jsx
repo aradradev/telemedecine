@@ -27,14 +27,22 @@ const Doctors = () => {
     return () => clearTimeout(timeout)
   }, [query])
 
+  const handleInputChange = (e) => {
+    setQuery(e.target.value)
+    if (e.target.value === '') {
+      setDebounceQuery('')
+    }
+  }
+
   // Construct query params
   // const queryParams = new URLSearchParams()
   // if (debounceQuery) {
   //   queryParams.set('name', debounceQuery)
   //   queryParams.set('specialization', debounceQuery)
   // }
+  // console.log(queryParams)
 
-  const { data, loading, error } = useFetchData(`${BASE_URL}/doctors?name=${debounceQuery}`)
+  const { data, loading, error } = useFetchData(`${BASE_URL}/doctors?specialization=${debounceQuery}`)
 
   // console.log('doctor find: ', data.doctors)
 
@@ -47,9 +55,9 @@ const Doctors = () => {
             <input
               type='search'
               className='py-4 pl-4 pr-2 bg-transparent w-full focus:outline-none cursor-pointer placeholder:text-textColor'
-              placeholder='Search Doctor By Name...'
+              placeholder='Search Doctor By Specialization...'
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={handleInputChange}
             />
             <button className='btn mt-0 rounded-[0px] rounded-r-md' onClick={handleSearch}>
               Search

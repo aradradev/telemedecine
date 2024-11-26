@@ -10,7 +10,7 @@ const getAllDoctors = async (req, res) => {
   const queryObject = {}
 
   if (specialization) {
-    queryObject.specialization = specialization
+    queryObject.specialization = { $regex: specialization, $options: 'i' }
   }
 
   if (name) {
