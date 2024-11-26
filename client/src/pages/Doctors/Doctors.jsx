@@ -1,4 +1,3 @@
-import { doctors } from '../../assets/data/doctors'
 import DoctorCard from '../../components/Doctors/DoctorCard'
 import Testimonial from '../../components/Testimonial/Testimonial'
 
@@ -13,8 +12,9 @@ const Doctors = () => {
   const [debounceQuery, setDebounceQuery] = useState('')
 
   // Function to handle Search
-  const handleSearch = () => {
-    setQuery(query.trim())
+  const handleSearch = (e) => {
+    setQuery(e.target.value)
+    setDebounceQuery(e.target.value)
     console.log('handle search triggered:', query)
   }
   useEffect(() => {
