@@ -18,24 +18,24 @@ const FeedbackForm = () => {
     try {
       if (!rating || !reviewText) {
         setLoading(false)
-        toast.error('Review & Rating Fields are required!')
+        return toast.error('Review & Rating Fields are required!')
 
-        const resp = await fetch(`${BASE_URL}/doctors/${id}/reviews`, {
-          method: 'post',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          credentials: 'include',
-          body: JSON.stringify({ rating, reviewText }),
-        })
-        const result = await resp.json()
-        if (!result.ok) {
-          throw new Error(result.message)
-        }
-
-        setLoading(false)
-        toast.success(result.message)
       }
+      const resp = await fetch(`${BASE_URL}/doctors/${id}/reviews`, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({ rating, reviewText }),
+      })
+      const result = await resp.json()
+      if (!result.ok) {
+        throw new Error(result.message)
+      }
+
+      setLoading(false)
+      toast.success(result.message)
     } catch (err) {
       toast.error(err.message)
     }
@@ -84,7 +84,7 @@ const FeedbackForm = () => {
           rows='5'></textarea>
       </div>
       <button className='btn' type='submit' onClick={handleSubmitReview}>
-        {loading ? <HashLoader size={25} color={'#fff'} /> : 'Submit Feedback'}
+        {loading ? <HashLoader size={25} color='#fff' /> : 'Submit Feedback'}
       </button>
     </form>
   )
