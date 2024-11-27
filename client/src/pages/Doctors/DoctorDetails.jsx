@@ -52,7 +52,7 @@ const DoctorDetails = () => {
                       <img src={starIcon} alt='starIcon' /> {doctor?.doctor?.reviews || '4.5'}
                     </span>
                     <span className='text-[14px] text-textColor leading-5 lg:text-[16px] lg:leading-7 font-[400]'>
-                      (272)
+                      ({doctor?.doctor?.totalRating})
                     </span>
                   </div>
                   <p className='text__para text-[14px] leading-6 md:text-[15px] lg:max-w-[390px]'>
@@ -89,7 +89,9 @@ const DoctorDetails = () => {
                     experiences={doctor?.doctor?.experiences}
                   />
                 )}
-                {tab === 'feedback' && <Feedback />}
+                {tab === 'feedback' && (
+                  <Feedback reviews={doctor?.doctor?.reviews} totalRating={doctor?.doctor?.totalRating} />
+                )}
               </div>
             </div>
             <div>
