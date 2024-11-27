@@ -15,21 +15,21 @@ const DoctorDetails = () => {
   const { id } = useParams()
   const { data: doctor, loading, error } = useFetchData(`${BASE_URL}/doctors/${id}`)
   console.log(doctor)
-  const {
-    name,
-    specialization,
-    averageRating,
-    totalRating,
-    photo,
-    totalPatients = 233,
-    experiences,
-    qualifications,
-    timeSlots,
-    reviews,
-    bio,
-    about,
-    ticketPrice,
-  } = doctor
+  // const {
+  //   name,
+  //   specialization,
+  //   averageRating,
+  //   totalRating,
+  //   photo,
+  //   totalPatients = 233,
+  //   experiences,
+  //   qualifications,
+  //   timeSlots,
+  //   reviews,
+  //   bio,
+  //   about,
+  //   ticketPrice,
+  // } = doctor
   const [tab, setTab] = useState('about')
   return (
     <section>
@@ -41,7 +41,7 @@ const DoctorDetails = () => {
             <div className='md:col-span-2'>
               <div className='flex items-center gap-5'>
                 <figure className='max-w-[200px] max-h-[200px]'>
-                  <img src={doctor?.photo} alt='imgDoctor' className='w-full' />
+                  <img src={imgDoctor} alt='imgDoctor' className='w-full' />
                 </figure>
                 <div>
                   <span className='bg-[#ccf0f3] text-irisBlueColor py-1 px-6 lg:py-2 lg:px-6 text-[12px] leading-4 lg:text-[16px] lg:leading-7 font-semibold rounded'>
