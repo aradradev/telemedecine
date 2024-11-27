@@ -2,6 +2,7 @@
 import { formateDate } from '../../utils/formateDate'
 
 const DoctorAbout = ({ name, about, experiences, qualifications }) => {
+  console.log(name)
   return (
     <div>
       <div>

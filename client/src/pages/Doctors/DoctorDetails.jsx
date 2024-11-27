@@ -57,7 +57,7 @@ const DoctorDetails = () => {
                     </span>
                   </div>
                   <p className='text__para text-[14px] leading-6 md:text-[15px] lg:max-w-[390px]'>
-                    {doctor?.doctor?.about}
+                    {doctor?.doctor?.bio}
                   </p>
                 </div>
               </div>
