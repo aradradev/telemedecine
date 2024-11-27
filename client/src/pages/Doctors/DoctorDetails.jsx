@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import imgDoctor from '../../assets/images/doctor-img02.png'
 import starIcon from '../../assets/images/Star.png'
 import DoctorAbout from './DoctorAbout'
 import Feedback from './Feedback'
