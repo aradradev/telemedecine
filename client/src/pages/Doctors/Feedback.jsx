@@ -21,13 +21,13 @@ const Feedback = ({ reviews, totalRating }) => {
               </figure>
               <div>
                 <h5 className='text-[16px] leading-6 text-primaryColor font-bold'>{review?.user?.name}</h5>
-                <p className='text-[14px] leading-6 text-textColor'>{formateDate('09-04-2024')}</p>
-                <p className='text__para mt-3 font-medium text-[15px]'>Good services, highly recommended 👍</p>
+                <p className='text-[14px] leading-6 text-textColor'>{formateDate(review?.createdAt)}</p>
+                <p className='text__para mt-3 font-medium text-[15px]'>{review?.reviewText}</p>
               </div>
             </div>
             <div className='flex gap-1'>
               {/* Star Icon */}
-              {[...Array(5).keys()].map((_, index) => (
+              {[...Array(review?.rating).keys()].map((_, index) => (
                 <AiFillStar key={index} color='#0067ff' />
               ))}
             </div>

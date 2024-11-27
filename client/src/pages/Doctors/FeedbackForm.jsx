@@ -1,13 +1,44 @@
 import { useState } from 'react'
 import { AiFillStar } from 'react-icons/ai'
+import { BASE_URL } from '../../config'
+import { useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import HashLoader from 'react-spinners/HashLoader'
 
 const FeedbackForm = () => {
   const [rating, setRating] = useState(0)
   const [hover, setHover] = useState(0)
   const [reviewText, setReviewText] = useState('')
+  const [loading, setLoading] = useState(false)
+  const { id } = useParams()
 
   const handleSubmitReview = async (e) => {
     e.preventDefault()
+    setLoading(true)
+    try {
+      if (!rating || !reviewText) {
+        setLoading(false)
+        toast.error('Review & Rating Fields are required!')
+
+        const resp = await fetch(`${BASE_URL}/doctors/${id}/reviews`, {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+          body: JSON.stringify({ rating, reviewText }),
+        })
+        const result = await resp.json()
+        if (!result.ok) {
+          throw new Error(result.message)
+        }
+
+        setLoading(false)
+        toast.success(result.message)
+      }
+    } catch (err) {
+      toast.error(err.message)
+    }
   }
 
   return (
@@ -53,7 +84,7 @@ const FeedbackForm = () => {
           rows='5'></textarea>
       </div>
       <button className='btn' type='submit' onClick={handleSubmitReview}>
-        Submit Feedback
+        {loading ? <HashLoader size={25} color={'#fff'} /> : 'Submit Feedback'}
       </button>
     </form>
   )
