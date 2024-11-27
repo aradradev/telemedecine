@@ -14,21 +14,21 @@ import { useParams } from 'react-router-dom'
 const DoctorDetails = () => {
   const { id } = useParams()
   const { data: doctor, loading, error } = useFetchData(`${BASE_URL}/doctors/${id}`)
-  const {
-    name,
-    specialization,
-    averageRating,
-    totalRating,
-    photo,
-    totalPatients = 233,
-    experiences,
-    qualifications,
-    timeSlots,
-    reviews,
-    bio,
-    about,
-    ticketPrice,
-  } = doctor
+  // const {
+  //   name,
+  //   specialization,
+  //   averageRating,
+  //   totalRating,
+  //   photo,
+  //   totalPatients = 233,
+  //   experiences,
+  //   qualifications,
+  //   timeSlots,
+  //   reviews,
+  //   bio,
+  //   about,
+  //   ticketPrice,
+  // } = doctor
   console.log(doctor)
   const [tab, setTab] = useState('about')
   return (
@@ -82,7 +82,14 @@ const DoctorDetails = () => {
               </div>
 
               <div className='mt-12'>
-                {tab === 'about' && <DoctorAbout />}
+                {tab === 'about' && (
+                  <DoctorAbout
+                    name={doctor?.doctor?.name}
+                    about={doctor?.doctor?.about}
+                    qualifications={doctor?.doctor?.qualifications}
+                    experiences={doctor?.doctor?.experiences}
+                  />
+                )}
                 {tab === 'feedback' && <Feedback />}
               </div>
             </div>
