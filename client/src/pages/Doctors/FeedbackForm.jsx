@@ -19,7 +19,6 @@ const FeedbackForm = () => {
       if (!rating || !reviewText) {
         setLoading(false)
         return toast.error('Review & Rating Fields are required!')
-
       }
       const resp = await fetch(`${BASE_URL}/doctors/${id}/reviews`, {
         method: 'post',
@@ -78,7 +77,7 @@ const FeedbackForm = () => {
           Share your feedback or suggestions*
         </h3>
         <textarea
-          className='border border-solid border-[#0066ff34] focus:outline outline-primaryColor w-full px-4 py-3 rounded-md'
+          className='border border-solid border-[#0066ff34] focus:outline outline-primaryColor w-full px-4 py-3 rounded-md resize-none'
           placeholder='Write your message'
           onChange={(e) => setReviewText(e.target.value)}
           rows='5'></textarea>
