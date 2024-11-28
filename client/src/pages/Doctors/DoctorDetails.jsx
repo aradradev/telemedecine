@@ -28,7 +28,7 @@ const DoctorDetails = () => {
   //   about,
   //   ticketPrice,
   // } = doctor
-  console.log(doctor)
+  console.log(doctor?.doctor?.reviews)
   const [tab, setTab] = useState('about')
   return (
     <section>
