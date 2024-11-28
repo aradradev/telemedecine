@@ -28,8 +28,9 @@ const FeedbackForm = () => {
         body: JSON.stringify({ rating, reviewText }),
       })
       const result = await resp.json()
+      console.log('resultForm data: ', result)
       if (!result.ok) {
-        throw new Error(result.message)
+        throw new Error(result.msg)
       }
 
       setLoading(false)
