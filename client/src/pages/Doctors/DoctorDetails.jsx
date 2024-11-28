@@ -30,6 +30,7 @@ const DoctorDetails = () => {
     bio,
     about,
     ticketPrice,
+    _id,
   } = doctor?.doctor || {}
 
   // console.log(reviews)
@@ -92,7 +93,7 @@ const DoctorDetails = () => {
               </div>
             </div>
             <div>
-              <SidePanel />
+              <SidePanel doctorId={_id} ticketPrice={ticketPrice} timeSlots={timeSlots} />
             </div>
           </div>
         )}
