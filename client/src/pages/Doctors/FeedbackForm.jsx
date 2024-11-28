@@ -14,14 +14,13 @@ const FeedbackForm = () => {
 
   const handleSubmitReview = async (e) => {
     e.preventDefault()
-    setLoading(true)
     try {
       if (!rating || !reviewText) {
         setLoading(false)
         return toast.error('Review & Rating Fields are required!')
       }
       const resp = await fetch(`${BASE_URL}/doctors/${id}/reviews`, {
-        method: 'post',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },

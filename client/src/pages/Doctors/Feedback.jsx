@@ -7,6 +7,7 @@ import FeedbackForm from './FeedbackForm'
 
 const Feedback = ({ reviews, totalRating }) => {
   const [showFeedbackForm, setShowFeedbackForm] = useState(false)
+  console.log('FeedBack reviews obj:', reviews)
   return (
     <div>
       <div className='mb-[50px]'>
@@ -17,17 +18,21 @@ const Feedback = ({ reviews, totalRating }) => {
           <div key={index} className='flex justify-between gap-10 mb-[30px]'>
             <div className='flex gap-3'>
               <figure className='w-10 h-10 rounded-full'>
-                <img src={review?.user?.photo} alt='avatarIcon' className='w-full' />
+                <img src={review?.user?.photo || avatarIcon} alt='avatarIcon' className='w-full' />
               </figure>
               <div>
-                <h5 className='text-[16px] leading-6 text-primaryColor font-bold'>{review?.user?.name}</h5>
-                <p className='text-[14px] leading-6 text-textColor'>{formateDate(review?.createdAt)}</p>
-                <p className='text__para mt-3 font-medium text-[15px]'>{review?.reviewText}</p>
+                <h5 className='text-[16px] leading-6 text-primaryColor font-bold'>
+                  {review?.user?.name || 'Anonymous User'}
+                </h5>
+                <p className='text-[14px] leading-6 text-textColor'>
+                  {formateDate(review?.createdAt || 'Unknown Date')}
+                </p>
+                <p className='text__para mt-3 font-medium text-[15px]'>{review?.reviewText || 'No feedback yet.'}</p>
               </div>
             </div>
             <div className='flex gap-1'>
               {/* Star Icon */}
-              {[...Array(review?.rating).keys()].map((_, index) => (
+              {[...Array(Math.round(review?.rating)).keys()].map((_, index) => (
                 <AiFillStar key={index} color='#0067ff' />
               ))}
             </div>
