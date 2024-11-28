@@ -10,7 +10,7 @@ const getAllDoctors = async (req, res) => {
   const queryObject = {}
 
   if (specialization) {
-    queryObject.specialization = specialization
+    queryObject.specialization = { $regex: specialization, $options: 'i' }
   }
 
   if (name) {
@@ -46,7 +46,11 @@ const getAllDoctors = async (req, res) => {
 const getSingleDoctor = async (req, res) => {
   const { id: doctorId } = req.params
   const doctor = await Doctor.findById(doctorId)
-    .populate({ path: 'reviews', select: 'user reviewText rating' })
+    .populate({
+      path: 'reviews',
+      populate: { path: 'user', select: 'name photo' },
+      select: 'user reviewText rating createdAt',
+    })
     .select('-password')
   if (!doctor) {
     throw new CustomError.NotFoundError(`No doctor with id: ${doctorId}`)
