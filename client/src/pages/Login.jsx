@@ -36,7 +36,7 @@ const Login = () => {
       const result = await res.json()
 
       if (!res.ok) {
-        throw new Error(result.message)
+        throw new Error(result.msg)
       }
 
       dispatch({

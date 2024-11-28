@@ -29,14 +29,15 @@ const FeedbackForm = () => {
       })
       const result = await resp.json()
       console.log('resultForm data: ', result)
-      if (!result.ok) {
-        throw new Error(result.msg)
+      if (!result.status) {
+        throw new Error(result.msg || 'Something went wrong')
       }
 
       setLoading(false)
       toast.success(result.message)
     } catch (err) {
-      toast.error(err.message)
+      setLoading(false)
+      toast.error(err.message || 'Failed to submit review')
     }
   }
 
